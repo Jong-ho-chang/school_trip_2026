@@ -3,215 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 수학여행 — 용인삼계고 2학년</title>
+<title>J.E.J.U. LENS 프로젝트 2026 — 용인삼계고 2학년</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700&display=swap');
-
   :root {
-    --red:    #c0392b;
-    --red-dk: #922b21;
-    --red-lt: #fdf0ee;
-    --blue:   #1a5276;
-    --blue-lt:#eaf4fb;
-    --purple: #6b3fa0;
-    --purple-lt:#f3eefb;
-    --gold:   #b7860b;
-    --gold-lt:#fdf8e1;
-    --green:  #1e7e34;
-    --green-lt:#eaf7ee;
-    --gray-1: #f7f7f5;
-    --gray-2: #eeece8;
-    --gray-3: #c8c4bc;
-    --gray-4: #8a8278;
-    --gray-5: #3d3a35;
-    --text:   #1e1c19;
-    --radius: 8px;
-    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --red:#c0392b; --red-dk:#922b21; --red-lt:#fdf0ee;
+    --blue:#1a5276; --blue-lt:#eaf4fb;
+    --purple:#6b3fa0; --purple-lt:#f3eefb;
+    --gold:#b7860b; --gold-lt:#fdf8e1;
+    --green:#1e7e34; --green-lt:#eaf7ee;
+    --gray-1:#f7f7f5; --gray-2:#eeece8; --gray-3:#c8c4bc;
+    --gray-4:#8a8278; --gray-5:#3d3a35; --text:#1e1c19;
+    --radius:8px; --shadow:0 2px 12px rgba(0,0,0,0.08);
   }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:var(--gray-1);color:var(--text);font-size:14px;line-height:1.6;}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* HEADER */
+  header{background:var(--red);padding:28px 24px 20px;text-align:center;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+  .project-name{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:700;letter-spacing:2px;color:#fff;position:relative;margin-bottom:4px;}
+  .jeju-def{font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:0.3px;position:relative;margin-bottom:8px;}
+  .school-name{font-size:13px;color:rgba(255,255,255,0.85);position:relative;}
+  .dates{display:inline-block;margin-top:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 16px;font-size:13px;position:relative;}
+  .lens-row{display:flex;justify-content:center;gap:8px;margin-top:14px;position:relative;}
+  .lens-badge{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:6px 12px;text-align:center;min-width:68px;}
+  .lens-letter{font-size:18px;font-weight:700;color:#fff;line-height:1;}
+  .lens-word{font-size:9.5px;color:rgba(255,255,255,0.8);margin-top:2px;letter-spacing:0.3px;}
+  .lens-team{font-size:9px;color:rgba(255,255,255,0.6);margin-top:1px;}
 
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background: var(--gray-1);
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.6;
-  }
+  /* NAV */
+  nav{background:#fff;border-bottom:1px solid var(--gray-2);display:flex;overflow-x:auto;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.06);scrollbar-width:none;}
+  nav::-webkit-scrollbar{display:none;}
+  nav button{flex:1;min-width:72px;padding:12px 6px;border:none;background:none;font-family:'Noto Sans KR',sans-serif;font-size:12.5px;font-weight:500;color:var(--gray-4);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+  nav button.active{color:var(--red);border-bottom-color:var(--red);}
+  nav button:hover:not(.active){color:var(--gray-5);}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--red);
-    color: #fff;
-    padding: 32px 24px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-  header h1 { font-family:'Noto Serif KR',serif; font-size:26px; font-weight:700; letter-spacing:-0.5px; position:relative; color:#fff; }
-  header .subtitle { font-size:13px; color:rgba(255,255,255,0.85); margin-top:6px; position:relative; }
-  header .dates { display:inline-block; margin-top:10px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:20px; padding:4px 16px; font-size:13px; position:relative; }
+  /* MAIN */
+  main{max-width:760px;margin:0 auto;padding:20px 16px 60px;}
+  .tab-section{display:none;} .tab-section.active{display:block;}
+  .section-title{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:700;color:var(--gray-5);margin-bottom:14px;}
 
-  /* ── NAV ── */
-  nav {
-    background:#fff; border-bottom:1px solid var(--gray-2);
-    display:flex; overflow-x:auto;
-    position:sticky; top:0; z-index:100;
-    box-shadow:0 1px 4px rgba(0,0,0,0.06);
-    scrollbar-width:none;
-  }
-  nav::-webkit-scrollbar { display:none; }
-  nav button {
-    flex:1; min-width:72px; padding:12px 6px;
-    border:none; background:none;
-    font-family:'Noto Sans KR',sans-serif; font-size:12.5px; font-weight:500;
-    color:var(--gray-4); cursor:pointer;
-    border-bottom:2px solid transparent; transition:all 0.2s;
-    white-space:nowrap;
-  }
-  nav button.active { color:var(--red); border-bottom-color:var(--red); }
-  nav button:hover:not(.active) { color:var(--gray-5); }
+  /* NOTICE */
+  .notice-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .notice-refresh{font-size:11px;color:var(--gray-4);cursor:pointer;display:flex;align-items:center;gap:4px;border:1px solid var(--gray-2);border-radius:4px;padding:4px 8px;background:#fff;}
+  .notice-refresh:hover{color:var(--red);border-color:var(--red);}
+  .notice-list{display:flex;flex-direction:column;gap:8px;}
+  .notice-item{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--shadow);}
+  .notice-item.important{border-left:3px solid var(--red);}
+  .notice-badge{flex-shrink:0;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:2px;}
+  .badge-공지{background:var(--red-lt);color:var(--red);}
+  .badge-유의{background:var(--gold-lt);color:var(--gold);}
+  .badge-전달{background:var(--blue-lt);color:var(--blue);}
+  .notice-content{flex:1;}
+  .notice-title{font-weight:500;font-size:14px;margin-bottom:3px;}
+  .notice-body{font-size:13px;color:var(--gray-4);line-height:1.5;}
+  .notice-date{font-size:11px;color:var(--gray-3);margin-top:4px;}
+  .notice-empty,.notice-loading{text-align:center;padding:40px 0;color:var(--gray-4);font-size:13px;}
 
-  /* ── MAIN ── */
-  main { max-width:760px; margin:0 auto; padding:20px 16px 60px; }
-  .tab-section { display:none; }
-  .tab-section.active { display:block; }
+  /* SCHEDULE */
+  .day-tabs{display:flex;gap:8px;margin-bottom:16px;}
+  .day-btn{flex:1;padding:9px 4px;border-radius:var(--radius);border:1.5px solid var(--gray-2);background:#fff;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;color:var(--gray-4);cursor:pointer;transition:all 0.2s;text-align:center;}
+  .day-btn.active{border-color:var(--red);background:var(--red-lt);color:var(--red);}
+  .day-btn:hover:not(.active){border-color:var(--gray-3);color:var(--gray-5);}
+  .day-panel{display:none;} .day-panel.active{display:block;}
+  .sched-card{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);overflow:hidden;box-shadow:var(--shadow);margin-bottom:12px;}
+  .sched-card-header{padding:10px 16px;border-bottom:1px solid var(--gray-2);font-size:12px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.5px;}
+  .sched-table{width:100%;border-collapse:collapse;font-size:13px;}
+  .sched-table td{padding:9px 16px;border-bottom:1px solid var(--gray-2);vertical-align:top;}
+  .sched-table tr:last-child td{border-bottom:none;}
+  .sched-table .time{color:var(--gray-3);font-size:11.5px;white-space:nowrap;width:90px;padding-right:8px;}
+  .sched-table .act{color:var(--text);font-weight:500;}
+  .sched-table .note{color:var(--gray-4);font-size:11.5px;}
+  .sched-tag{display:inline-block;font-size:10px;font-weight:700;border-radius:3px;padding:1px 6px;margin-left:5px;vertical-align:middle;}
+  .tag-meal{background:var(--gold-lt);color:var(--gold);}
+  .tag-sleep{background:var(--blue-lt);color:var(--blue);}
+  .tag-move{background:var(--green-lt);color:var(--green);}
 
-  /* ── SECTION TITLE ── */
-  .section-title { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:700; color:var(--gray-5); margin-bottom:14px; }
+  /* COURSE */
+  .course-warning{background:var(--gold-lt);border:1px solid #f0d080;border-radius:var(--radius);padding:10px 14px;font-size:13px;color:#7a5c00;margin-bottom:14px;display:flex;gap:8px;align-items:center;}
+  .day2-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+  @media(max-width:580px){.day2-grid{grid-template-columns:1fr;}}
+  .course-card{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);overflow:hidden;box-shadow:var(--shadow);}
+  .course-card-hd{padding:10px 13px 8px;border-bottom:1px solid var(--gray-2);}
+  .course-tag{display:inline-block;font-size:11px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:5px;}
+  .tag-h{background:var(--red-lt);color:var(--red);}
+  .tag-s{background:var(--blue-lt);color:var(--blue);}
+  .tag-a{background:var(--purple-lt);color:var(--purple);}
+  .course-concept{font-size:11px;font-style:italic;color:var(--gray-4);line-height:1.5;}
+  .course-card-bd{padding:10px 13px 12px;}
+  .tl{display:flex;gap:8px;margin-bottom:7px;font-size:12px;line-height:1.4;}
+  .tl-t{color:var(--gray-3);font-size:11px;white-space:nowrap;flex-shrink:0;padding-top:1px;min-width:34px;}
+  .tl-n{font-weight:500;} .tl-d{font-size:11px;color:var(--gray-4);}
+  .meal-tag{display:inline-block;background:var(--gold-lt);color:var(--gold);border:1px solid #f0d080;border-radius:3px;font-size:10px;padding:0 5px;margin-left:3px;vertical-align:middle;}
+  .active-tag{display:inline-block;background:var(--red-lt);color:var(--red);border:1px solid #f5b8b8;border-radius:3px;font-size:10px;padding:0 5px;margin-left:3px;vertical-align:middle;}
+  .compare-box{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow);}
+  .compare-label{padding:8px 14px;font-size:11px;font-weight:500;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--gray-2);}
+  .compare-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .compare-table th{padding:7px 10px;text-align:center;font-weight:500;font-size:11px;border-bottom:1px solid var(--gray-2);color:var(--gray-4);}
+  .compare-table th:first-child{text-align:left;}
+  .compare-table td{padding:6px 10px;text-align:center;border-bottom:1px solid var(--gray-2);}
+  .compare-table td:first-child{text-align:left;color:var(--gray-4);font-size:11.5px;}
+  .compare-table tr:last-child td{border-bottom:none;}
+  .dots{display:inline-flex;gap:3px;}
+  .dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--gray-2);background:var(--gray-1);}
+  .dot.h{background:var(--red);border-color:var(--red);}
+  .dot.s{background:var(--blue);border-color:var(--blue);}
+  .dot.a{background:var(--purple);border-color:var(--purple);}
+  .fit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+  @media(max-width:580px){.fit-grid{grid-template-columns:1fr;}}
+  .fit-card{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);padding:12px 13px;font-size:12px;box-shadow:var(--shadow);}
+  .fit-title{font-size:12px;font-weight:700;margin-bottom:7px;}
+  .fit-item{display:flex;gap:5px;margin-bottom:3px;}
+  .fit-warn{display:flex;gap:5px;margin-top:6px;color:var(--gray-4);font-size:11.5px;}
 
-  /* ── NOTICE ── */
-  .notice-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-  .notice-refresh { font-size:11px; color:var(--gray-4); cursor:pointer; display:flex; align-items:center; gap:4px; border:1px solid var(--gray-2); border-radius:4px; padding:4px 8px; background:#fff; }
-  .notice-refresh:hover { color:var(--red); border-color:var(--red); }
-  .notice-list { display:flex; flex-direction:column; gap:8px; }
-  .notice-item { background:#fff; border-radius:var(--radius); border:1px solid var(--gray-2); padding:14px 16px; display:flex; gap:12px; align-items:flex-start; box-shadow:var(--shadow); }
-  .notice-item.important { border-left:3px solid var(--red); }
-  .notice-badge { flex-shrink:0; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; margin-top:2px; }
-  .badge-공지 { background:var(--red-lt); color:var(--red); }
-  .badge-유의 { background:var(--gold-lt); color:var(--gold); }
-  .badge-전달 { background:var(--blue-lt); color:var(--blue); }
-  .notice-content { flex:1; }
-  .notice-title { font-weight:500; font-size:14px; margin-bottom:3px; }
-  .notice-body { font-size:13px; color:var(--gray-4); line-height:1.5; }
-  .notice-date { font-size:11px; color:var(--gray-3); margin-top:4px; }
-  .notice-empty,.notice-loading { text-align:center; padding:40px 0; color:var(--gray-4); font-size:13px; }
-
-  /* ── SCHEDULE (전일정) ── */
-  .day-tabs { display:flex; gap:8px; margin-bottom:16px; }
-  .day-btn {
-    flex:1; padding:9px 4px; border-radius:var(--radius);
-    border:1.5px solid var(--gray-2); background:#fff;
-    font-family:'Noto Sans KR',sans-serif; font-size:13px; font-weight:500;
-    color:var(--gray-4); cursor:pointer; transition:all 0.2s; text-align:center;
-  }
-  .day-btn.active { border-color:var(--red); background:var(--red-lt); color:var(--red); }
-  .day-btn:hover:not(.active) { border-color:var(--gray-3); color:var(--gray-5); }
-
-  .day-panel { display:none; }
-  .day-panel.active { display:block; }
-
-  /* 1·3일차: 공통 타임라인 */
-  .sched-card {
-    background:#fff; border-radius:var(--radius);
-    border:1px solid var(--gray-2); overflow:hidden;
-    box-shadow:var(--shadow); margin-bottom:12px;
-  }
-  .sched-card-header {
-    padding:10px 16px; border-bottom:1px solid var(--gray-2);
-    font-size:12px; font-weight:700; color:var(--gray-4);
-    text-transform:uppercase; letter-spacing:0.5px;
-  }
-  .sched-table { width:100%; border-collapse:collapse; font-size:13px; }
-  .sched-table td { padding:9px 16px; border-bottom:1px solid var(--gray-2); vertical-align:top; }
-  .sched-table tr:last-child td { border-bottom:none; }
-  .sched-table .time { color:var(--gray-3); font-size:11.5px; white-space:nowrap; width:90px; padding-right:8px; }
-  .sched-table .act { color:var(--text); font-weight:500; }
-  .sched-table .note { color:var(--gray-4); font-size:11.5px; }
-  .sched-tag {
-    display:inline-block; font-size:10px; font-weight:700;
-    border-radius:3px; padding:1px 6px; margin-left:5px; vertical-align:middle;
-  }
-  .tag-meal { background:var(--gold-lt); color:var(--gold); }
-  .tag-sleep { background:var(--blue-lt); color:var(--blue); }
-  .tag-move { background:var(--green-lt); color:var(--green); }
-
-  /* 2일차: 3열 그리드 */
-  .course-warning { background:var(--gold-lt); border:1px solid #f0d080; border-radius:var(--radius); padding:10px 14px; font-size:13px; color:#7a5c00; margin-bottom:14px; display:flex; gap:8px; align-items:center; }
-  .day2-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:14px; }
-  @media(max-width:580px){ .day2-grid { grid-template-columns:1fr; } }
-  .course-card { background:#fff; border-radius:var(--radius); border:1px solid var(--gray-2); overflow:hidden; box-shadow:var(--shadow); }
-  .course-card-hd { padding:10px 13px 8px; border-bottom:1px solid var(--gray-2); }
-  .course-tag { display:inline-block; font-size:11px; font-weight:700; border-radius:4px; padding:2px 8px; margin-bottom:5px; }
-  .tag-h { background:var(--red-lt); color:var(--red); }
-  .tag-s { background:var(--blue-lt); color:var(--blue); }
-  .tag-a { background:var(--purple-lt); color:var(--purple); }
-  .course-concept { font-size:11px; font-style:italic; color:var(--gray-4); line-height:1.5; }
-  .course-card-bd { padding:10px 13px 12px; }
-  .tl { display:flex; gap:8px; margin-bottom:7px; font-size:12px; line-height:1.4; }
-  .tl-t { color:var(--gray-3); font-size:11px; white-space:nowrap; flex-shrink:0; padding-top:1px; min-width:34px; }
-  .tl-n { font-weight:500; }
-  .tl-d { font-size:11px; color:var(--gray-4); }
-  .meal-tag { display:inline-block; background:var(--gold-lt); color:var(--gold); border:1px solid #f0d080; border-radius:3px; font-size:10px; padding:0 5px; margin-left:3px; vertical-align:middle; }
-  .active-tag { display:inline-block; background:var(--red-lt); color:var(--red); border:1px solid #f5b8b8; border-radius:3px; font-size:10px; padding:0 5px; margin-left:3px; vertical-align:middle; }
-
-  /* 비교표 */
-  .compare-box { background:#fff; border-radius:var(--radius); border:1px solid var(--gray-2); overflow:hidden; margin-bottom:14px; box-shadow:var(--shadow); }
-  .compare-label { padding:8px 14px; font-size:11px; font-weight:500; color:var(--gray-4); text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--gray-2); }
-  .compare-table { width:100%; border-collapse:collapse; font-size:12.5px; }
-  .compare-table th { padding:7px 10px; text-align:center; font-weight:500; font-size:11px; border-bottom:1px solid var(--gray-2); color:var(--gray-4); }
-  .compare-table th:first-child { text-align:left; }
-  .compare-table td { padding:6px 10px; text-align:center; border-bottom:1px solid var(--gray-2); }
-  .compare-table td:first-child { text-align:left; color:var(--gray-4); font-size:11.5px; }
-  .compare-table tr:last-child td { border-bottom:none; }
-  .dots { display:inline-flex; gap:3px; }
-  .dot { width:9px; height:9px; border-radius:50%; border:1px solid var(--gray-2); background:var(--gray-1); }
-  .dot.h { background:var(--red); border-color:var(--red); }
-  .dot.s { background:var(--blue); border-color:var(--blue); }
-  .dot.a { background:var(--purple); border-color:var(--purple); }
-
-  /* 이런 학생에게 */
-  .fit-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
-  @media(max-width:580px){ .fit-grid { grid-template-columns:1fr; } }
-  .fit-card { background:#fff; border-radius:var(--radius); border:1px solid var(--gray-2); padding:12px 13px; font-size:12px; box-shadow:var(--shadow); }
-  .fit-title { font-size:12px; font-weight:700; margin-bottom:7px; }
-  .fit-item { display:flex; gap:5px; margin-bottom:3px; }
-  .fit-warn { display:flex; gap:5px; margin-top:6px; color:var(--gray-4); font-size:11.5px; }
-
-  /* ── APPLY ── */
-  .bottom-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  @media(max-width:480px){ .bottom-grid { grid-template-columns:1fr; } }
-  .check-card,.apply-card { background:#fff; border-radius:var(--radius); border:1px solid var(--gray-2); padding:14px 16px; box-shadow:var(--shadow); }
-  .card-title { font-size:11px; font-weight:700; color:var(--gray-4); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; }
-  .check-item { display:flex; gap:8px; align-items:flex-start; margin-bottom:6px; font-size:12.5px; line-height:1.5; }
-  .check-num { width:18px; height:18px; border-radius:50%; border:1px solid var(--gray-2); display:flex; align-items:center; justify-content:center; font-size:9px; flex-shrink:0; color:var(--gray-4); margin-top:1px; }
-  .info-row { display:flex; justify-content:space-between; font-size:12px; padding:4px 0; border-bottom:1px solid var(--gray-2); }
-  .info-row:last-of-type { border-bottom:none; margin-bottom:12px; }
-  .info-key { color:var(--gray-4); }
-  .info-val { font-weight:500; }
-  .info-val.accent { color:var(--red); }
-  .apply-btn { display:block; width:100%; padding:11px 0; border-radius:var(--radius); border:none; background:var(--red); color:#fff; font-family:'Noto Sans KR',sans-serif; font-size:14px; font-weight:700; cursor:pointer; text-align:center; text-decoration:none; transition:background 0.2s; }
-  .apply-btn:hover { background:var(--red-dk); }
-  .apply-note { text-align:center; font-size:11px; color:var(--gray-4); margin-top:6px; }
-
-  .info-box { background:#fff; border-radius:var(--radius); border:1px solid var(--gray-2); padding:13px 16px; font-size:12.5px; color:var(--gray-4); line-height:1.7; box-shadow:var(--shadow); margin-top:14px; }
-
-  footer { text-align:center; padding:20px 0 40px; font-size:11px; color:var(--gray-3); }
-  .mt12 { margin-top:12px; }
-  .mt16 { margin-top:16px; }
+  /* APPLY */
+  .bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:480px){.bottom-grid{grid-template-columns:1fr;}}
+  .check-card,.apply-card{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);padding:14px 16px;box-shadow:var(--shadow);}
+  .card-title{font-size:11px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+  .check-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;line-height:1.5;}
+  .check-num{width:18px;height:18px;border-radius:50%;border:1px solid var(--gray-2);display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;color:var(--gray-4);margin-top:1px;}
+  .info-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--gray-2);}
+  .info-row:last-of-type{border-bottom:none;margin-bottom:12px;}
+  .info-key{color:var(--gray-4);} .info-val{font-weight:500;} .info-val.accent{color:var(--red);}
+  .apply-btn{display:block;width:100%;padding:11px 0;border-radius:var(--radius);border:none;background:var(--red);color:#fff;font-family:'Noto Sans KR',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:background 0.2s;}
+  .apply-btn:hover{background:var(--red-dk);}
+  .apply-note{text-align:center;font-size:11px;color:var(--gray-4);margin-top:6px;}
+  .info-box{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);padding:13px 16px;font-size:12.5px;color:var(--gray-4);line-height:1.7;box-shadow:var(--shadow);margin-top:14px;}
+  footer{text-align:center;padding:20px 0 40px;font-size:11px;color:var(--gray-3);}
+  .mt12{margin-top:12px;}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🌿 2026 제주 수학여행</h1>
-  <div class="subtitle">용인삼계고등학교 2학년</div>
+  <div class="project-name">J·E·J·U · L·E·N·S</div>
+  <div class="jeju-def">Journey · Exploration · Joy · Unity — 네 개의 시선으로 기록하는 우리들의 제주</div>
+  <div class="school-name">용인삼계고등학교 2학년 수학여행 2026</div>
   <div class="dates">2026. 10. 14(수) — 10. 16(금) · 금호리조트 다랑쉬동</div>
+  <div class="lens-row">
+    <div class="lens-badge"><div class="lens-letter">L</div><div class="lens-word">Look</div><div class="lens-team">L-Team</div></div>
+    <div class="lens-badge"><div class="lens-letter">E</div><div class="lens-word">Explore</div><div class="lens-team">E-Team</div></div>
+    <div class="lens-badge"><div class="lens-letter">N</div><div class="lens-word">Notice</div><div class="lens-team">N-Team</div></div>
+    <div class="lens-badge"><div class="lens-letter">S</div><div class="lens-word">Share</div><div class="lens-team">공통</div></div>
+  </div>
 </header>
 
 <nav>
@@ -223,7 +159,7 @@
 
 <main>
 
-<!-- ══ 공지사항 ══ -->
+<!-- 공지사항 -->
 <section id="tab-notice" class="tab-section active">
   <div class="notice-header">
     <div class="section-title">공지 및 전달사항</div>
@@ -234,10 +170,9 @@
   </div>
 </section>
 
-<!-- ══ 전체 일정 ══ -->
+<!-- 전체 일정 -->
 <section id="tab-schedule" class="tab-section">
   <div class="section-title">전체 일정</div>
-
   <div class="day-tabs">
     <button class="day-btn active" onclick="switchDay('day1',this)">1일차<br><span style="font-size:11px;font-weight:400">10.14(수)</span></button>
     <button class="day-btn" onclick="switchDay('day2',this)">2일차<br><span style="font-size:11px;font-weight:400">10.15(목)</span></button>
@@ -250,25 +185,25 @@
       <div class="sched-card-header">A조 (선발대) · 09:30 학교 집결</div>
       <table class="sched-table">
         <tr><td class="time">09:30–10:00</td><td><div class="act">인원점검 및 학교 출발</div></td><td class="note">09시30분 학교 집결</td></tr>
-        <tr><td class="time">11:30–12:30</td><td><div class="act">김포공항 도착 및 탑승수속</div><span class="sched-tag tag-move">이동</span></td><td class="note">간편식 [햄버거+음료] 제공</td></tr>
-        <tr><td class="time">13:20–15:20</td><td><div class="act">김포공항 출발 → 제주공항 도착</div><span class="sched-tag tag-move">항공</span></td><td class="note">아시아나항공 13시20분 [100석]</td></tr>
+        <tr><td class="time">11:30–12:30</td><td><div class="act">김포공항 도착 및 탑승수속<span class="sched-tag tag-move">이동</span></div></td><td class="note">간편식 [햄버거+음료] 제공</td></tr>
+        <tr><td class="time">13:20–15:20</td><td><div class="act">김포공항 출발 → 제주공항 도착<span class="sched-tag tag-move">항공</span></div></td><td class="note">아시아나항공 13시20분 [100석]</td></tr>
         <tr><td class="time">16:00–17:00</td><td><div class="act">함덕해수욕장</div></td><td class="note"></td></tr>
-        <tr><td class="time">17:40–18:40</td><td><div class="act">석식</div><span class="sched-tag tag-meal">참더덕과흑돼지</span></td><td class="note">흑돼지주물럭 무한리필 · 17시40분 예약</td></tr>
-        <tr><td class="time">19:10–20:30</td><td><div class="act">숙소 도착 / 객실 배정 및 휴식</div><span class="sched-tag tag-sleep">숙소</span></td><td class="note">짐정리 및 레크리에이션 준비</td></tr>
-        <tr><td class="time">21:00–22:30</td><td><div class="act">레크리에이션</div></td><td class="note">친구들과 함께하는 즐거운 시간</td></tr>
-        <tr><td class="time">23:00–23:30</td><td><div class="act">환자파악 / 인원 점검 후 취침</div><span class="sched-tag tag-sleep">취침</span></td><td class="note"></td></tr>
+        <tr><td class="time">17:40–18:40</td><td><div class="act">석식<span class="sched-tag tag-meal">참더덕과흑돼지</span></div></td><td class="note">흑돼지주물럭 무한리필 · 17시40분 예약</td></tr>
+        <tr><td class="time">19:10–20:30</td><td><div class="act">숙소 도착 / 객실 배정 및 휴식<span class="sched-tag tag-sleep">숙소</span></div></td><td class="note">담임선생님과의 시간</td></tr>
+        <tr><td class="time">21:00–22:30</td><td><div class="act">레크리에이션 (장기자랑)</div></td><td class="note">담임선생님과의 시간</td></tr>
+        <tr><td class="time">23:00–23:30</td><td><div class="act">환자파악 / 인원 점검 후 취침<span class="sched-tag tag-sleep">취침</span></div></td><td class="note"></td></tr>
       </table>
     </div>
     <div class="sched-card">
       <div class="sched-card-header">B·C조 (후발대) · 11:00 학교 집결</div>
       <table class="sched-table">
         <tr><td class="time">11:00–11:30</td><td><div class="act">인원점검 및 학교 출발</div></td><td class="note">11시 학교 집결</td></tr>
-        <tr><td class="time">13:00–14:00</td><td><div class="act">김포공항 도착 및 탑승수속</div><span class="sched-tag tag-move">이동</span></td><td class="note">간편식 [햄버거+음료] 제공</td></tr>
-        <tr><td class="time">15:10–17:10</td><td><div class="act">김포공항 출발 → 제주공항 도착</div><span class="sched-tag tag-move">항공</span></td><td class="note">아시아나항공 15시10분 [170석]</td></tr>
-        <tr><td class="time">18:00–19:00</td><td><div class="act">석식</div><span class="sched-tag tag-meal">참더덕과흑돼지</span></td><td class="note">흑돼지주물럭 무한리필 · 18시 예약</td></tr>
-        <tr><td class="time">19:30–20:30</td><td><div class="act">숙소 도착 / 객실 배정 및 휴식</div><span class="sched-tag tag-sleep">숙소</span></td><td class="note">짐정리 및 레크리에이션 준비</td></tr>
-        <tr><td class="time">21:00–22:30</td><td><div class="act">레크리에이션</div></td><td class="note">친구들과 함께하는 즐거운 시간</td></tr>
-        <tr><td class="time">23:00–23:30</td><td><div class="act">환자파악 / 인원 점검 후 취침</div><span class="sched-tag tag-sleep">취침</span></td><td class="note"></td></tr>
+        <tr><td class="time">13:00–14:00</td><td><div class="act">김포공항 도착 및 탑승수속<span class="sched-tag tag-move">이동</span></div></td><td class="note">간편식 [햄버거+음료] 제공</td></tr>
+        <tr><td class="time">15:10–17:10</td><td><div class="act">김포공항 출발 → 제주공항 도착<span class="sched-tag tag-move">항공</span></div></td><td class="note">아시아나항공 15시10분 [170석]</td></tr>
+        <tr><td class="time">18:00–19:00</td><td><div class="act">석식<span class="sched-tag tag-meal">참더덕과흑돼지</span></div></td><td class="note">흑돼지주물럭 무한리필 · 18시 예약</td></tr>
+        <tr><td class="time">19:30–20:30</td><td><div class="act">숙소 도착 / 객실 배정 및 휴식<span class="sched-tag tag-sleep">숙소</span></div></td><td class="note">담임선생님과의 시간</td></tr>
+        <tr><td class="time">21:00–22:30</td><td><div class="act">레크리에이션 (장기자랑)</div></td><td class="note">담임선생님과의 시간</td></tr>
+        <tr><td class="time">23:00–23:30</td><td><div class="act">환자파악 / 인원 점검 후 취침<span class="sched-tag tag-sleep">취침</span></div></td><td class="note"></td></tr>
       </table>
     </div>
   </div>
@@ -276,13 +211,11 @@
   <!-- 2일차 -->
   <div id="day2" class="day-panel">
     <div style="background:var(--gold-lt);border:1px solid #f0d080;border-radius:var(--radius);padding:10px 14px;font-size:13px;color:#7a5c00;margin-bottom:14px;display:flex;gap:8px;">
-      <span>🗺️</span>
-      <span>2일차는 학생 희망에 따라 <strong>인문·과학·예술팀</strong>으로 나뉘어 운영됩니다. 코스 신청 탭에서 신청하세요.</span>
+      <span>🗺️</span><span>2일차는 학생 희망에 따라 <strong>L·E·N-Team</strong>으로 나뉘어 운영됩니다. 코스 신청 탭에서 신청하세요.</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
-      <!-- 인문 -->
       <div class="sched-card">
-        <div class="sched-card-header" style="color:var(--red)">인문팀</div>
+        <div class="sched-card-header" style="color:var(--red)">L-Team (인문)</div>
         <table class="sched-table" style="font-size:12px;">
           <tr><td class="time">06:00–08:00</td><td><div class="act">기상 및 조식 / 출발</div></td></tr>
           <tr><td class="time">09:00–10:00</td><td><div class="act">퍼시픽요트투어</div></td></tr>
@@ -290,13 +223,12 @@
           <tr><td class="time">12:00–13:00</td><td><div class="act">중식<span class="meal-tag">제육·고등어구이</span></div><div class="tl-d">낭뜰에쉼팡</div></td></tr>
           <tr><td class="time">13:50–14:50</td><td><div class="act">4·3평화공원</div></td></tr>
           <tr><td class="time">15:30–16:30</td><td><div class="act">해녀박물관</div></td></tr>
-          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div></td></tr>
+          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">낭뜰에쉼팡</span></div></td></tr>
           <tr><td class="time">19:00~</td><td><div class="act">숙소 및 자유시간</div></td></tr>
         </table>
       </div>
-      <!-- 과학 -->
       <div class="sched-card">
-        <div class="sched-card-header" style="color:var(--blue)">과학팀</div>
+        <div class="sched-card-header" style="color:var(--blue)">E-Team (과학)</div>
         <table class="sched-table" style="font-size:12px;">
           <tr><td class="time">06:30–08:30</td><td><div class="act">기상 및 조식 / 출발</div></td></tr>
           <tr><td class="time">09:30–10:30</td><td><div class="act">제주 레일바이크</div></td></tr>
@@ -307,9 +239,8 @@
           <tr><td class="time">19:00~</td><td><div class="act">숙소 및 자유시간</div></td></tr>
         </table>
       </div>
-      <!-- 예술 -->
       <div class="sched-card">
-        <div class="sched-card-header" style="color:var(--purple)">예술팀</div>
+        <div class="sched-card-header" style="color:var(--purple)">N-Team (예술)</div>
         <table class="sched-table" style="font-size:12px;">
           <tr><td class="time">06:30–08:30</td><td><div class="act">기상 및 조식 / 출발</div></td></tr>
           <tr><td class="time">09:30–10:50</td><td><div class="act">섭지코지</div></td></tr>
@@ -325,7 +256,7 @@
     <div class="sched-card">
       <div class="sched-card-header">공통 (취침)</div>
       <table class="sched-table">
-        <tr><td class="time">22:00–22:30</td><td><div class="act">환자파악 / 인원 점검 후 취침</div><span class="sched-tag tag-sleep">취침</span></td><td class="note"></td></tr>
+        <tr><td class="time">22:00–22:30</td><td><div class="act">환자파악 / 인원 점검 후 취침<span class="sched-tag tag-sleep">취침</span></div></td><td class="note"></td></tr>
       </table>
     </div>
   </div>
@@ -337,14 +268,14 @@
       <table class="sched-table">
         <tr><td class="time">07:00–09:10</td><td><div class="act">기상 및 조식 / 출발</div></td><td class="note"></td></tr>
         <tr><td class="time">10:00–10:50</td><td><div class="act">제트보트</div></td><td class="note">10시 예약</td></tr>
-        <tr><td class="time">11:00–12:00</td><td><div class="act">중식</div><span class="sched-tag tag-meal">숙성돈가</span></td><td class="note">11시 예약</td></tr>
+        <tr><td class="time">11:00–12:00</td><td><div class="act">중식<span class="sched-tag tag-meal">숙성돈가</span></div></td><td class="note">11시 예약</td></tr>
         <tr><td class="time">12:10–13:10</td><td><div class="act">주상절리</div></td><td class="note"></td></tr>
         <tr><td class="time">14:00–15:00</td><td><div class="act">애월 한담공원</div></td><td class="note"></td></tr>
         <tr><td class="time">15:30–16:30</td><td><div class="act">노형슈퍼마켓</div></td><td class="note">예약 완료</td></tr>
-        <tr><td class="time">17:00–18:30</td><td><div class="act">석식</div><span class="sched-tag tag-meal">칠성뷔페</span></td><td class="note">17시 예약</td></tr>
-        <tr><td class="time">19:00–20:00</td><td><div class="act">제주공항 도착 / 탑승수속</div><span class="sched-tag tag-move">이동</span></td><td class="note"></td></tr>
-        <tr><td class="time">20:55–22:10</td><td><div class="act">제주공항 출발 → 김포공항 도착</div><span class="sched-tag tag-move">항공</span></td><td class="note">아시아나항공 20시55분 [112석]</td></tr>
-        <tr><td class="time">23:00–00:30</td><td><div class="act">인원파악 및 버스탑승 / 학교 도착</div><span class="sched-tag tag-move">귀가</span></td><td class="note"></td></tr>
+        <tr><td class="time">17:00–18:30</td><td><div class="act">석식<span class="sched-tag tag-meal">칠성뷔페</span></div></td><td class="note">17시 예약</td></tr>
+        <tr><td class="time">19:00–20:00</td><td><div class="act">제주공항 도착 / 탑승수속<span class="sched-tag tag-move">이동</span></div></td><td class="note"></td></tr>
+        <tr><td class="time">20:55–22:10</td><td><div class="act">제주공항 출발 → 김포공항 도착<span class="sched-tag tag-move">항공</span></div></td><td class="note">아시아나항공 20시55분 [112석]</td></tr>
+        <tr><td class="time">23:00–00:30</td><td><div class="act">인원파악 및 버스탑승 / 학교 도착<span class="sched-tag tag-move">귀가</span></div></td><td class="note"></td></tr>
       </table>
     </div>
     <div class="sched-card">
@@ -353,30 +284,28 @@
         <tr><td class="time">07:00–09:30</td><td><div class="act">기상 및 조식 / 출발</div></td><td class="note"></td></tr>
         <tr><td class="time">10:20–11:20</td><td><div class="act">주상절리</div></td><td class="note"></td></tr>
         <tr><td class="time">11:30–12:20</td><td><div class="act">제트보트</div></td><td class="note">11시40분 예약</td></tr>
-        <tr><td class="time">12:30–13:30</td><td><div class="act">중식</div><span class="sched-tag tag-meal">숙성돈가</span></td><td class="note">12시30분 예약</td></tr>
+        <tr><td class="time">12:30–13:30</td><td><div class="act">중식<span class="sched-tag tag-meal">숙성돈가</span></div></td><td class="note">12시30분 예약</td></tr>
         <tr><td class="time">14:10–15:10</td><td><div class="act">애월 한담공원</div></td><td class="note"></td></tr>
         <tr><td class="time">15:40–16:40</td><td><div class="act">노형슈퍼마켓</div></td><td class="note">예약 완료</td></tr>
-        <tr><td class="time">17:10–18:40</td><td><div class="act">석식</div><span class="sched-tag tag-meal">칠성뷔페</span></td><td class="note">17시 예약</td></tr>
-        <tr><td class="time">19:00–20:00</td><td><div class="act">제주공항 도착 / 탑승수속</div><span class="sched-tag tag-move">이동</span></td><td class="note"></td></tr>
-        <tr><td class="time">21:00–22:15</td><td><div class="act">제주공항 출발 → 김포공항 도착</div><span class="sched-tag tag-move">항공</span></td><td class="note">아시아나항공 21시 [158석]</td></tr>
-        <tr><td class="time">23:00–00:30</td><td><div class="act">인원파악 및 버스탑승 / 학교 도착</div><span class="sched-tag tag-move">귀가</span></td><td class="note"></td></tr>
+        <tr><td class="time">17:10–18:40</td><td><div class="act">석식<span class="sched-tag tag-meal">칠성뷔페</span></div></td><td class="note">17시 예약</td></tr>
+        <tr><td class="time">19:00–20:00</td><td><div class="act">제주공항 도착 / 탑승수속<span class="sched-tag tag-move">이동</span></div></td><td class="note"></td></tr>
+        <tr><td class="time">21:00–22:15</td><td><div class="act">제주공항 출발 → 김포공항 도착<span class="sched-tag tag-move">항공</span></div></td><td class="note">아시아나항공 21시 [158석]</td></tr>
+        <tr><td class="time">23:00–00:30</td><td><div class="act">인원파악 및 버스탑승 / 학교 도착<span class="sched-tag tag-move">귀가</span></div></td><td class="note"></td></tr>
       </table>
     </div>
   </div>
-
 </section>
 
-<!-- ══ 코스 안내 ══ -->
+<!-- 코스 안내 -->
 <section id="tab-course" class="tab-section">
   <div class="course-warning">
     <span>⚠</span>
-    <span>코스 정원: 인문팀 <strong>85명 내외</strong> · 과학팀 <strong>85명 내외</strong> · 예술팀 <strong>85명 내외</strong>. 1지망·2지망·3지망 모두 작성해야 신청이 완료됩니다.</span>
+    <span>코스 정원: L-Team <strong>85명</strong> · E-Team <strong>120명</strong> · N-Team <strong>120명</strong>. 1·2·3지망 모두 작성해야 신청이 완료됩니다.</span>
   </div>
-
   <div class="day2-grid">
     <div class="course-card">
       <div class="course-card-hd">
-        <div class="course-tag tag-h">인문팀</div>
+        <div class="course-tag tag-h">L-Team · Look</div>
         <div class="course-concept">"바다 위에서 생각하고,<br>땅 위의 역사를 걷는다"</div>
       </div>
       <div class="course-card-bd">
@@ -390,7 +319,7 @@
     </div>
     <div class="course-card">
       <div class="course-card-hd">
-        <div class="course-tag tag-s">과학팀</div>
+        <div class="course-tag tag-s">E-Team · Explore</div>
         <div class="course-concept">"자연이 만든 것과<br>인간이 만든 것, 둘 다 본다"</div>
       </div>
       <div class="course-card-bd">
@@ -403,7 +332,7 @@
     </div>
     <div class="course-card">
       <div class="course-card-hd">
-        <div class="course-tag tag-a">예술팀</div>
+        <div class="course-tag tag-a">N-Team · Notice</div>
         <div class="course-concept">"감각으로 부딪히는 제주—<br>빛, 공간, 움직임"</div>
       </div>
       <div class="course-card-bd">
@@ -411,7 +340,7 @@
         <div class="tl"><span class="tl-t">10:50</span><div><div class="tl-n">빛의벙커</div><div class="tl-d">몰입형 미디어아트 전시 (실내)</div></div></div>
         <div class="tl"><span class="tl-t">12:30</span><div><div class="tl-n">중식<span class="meal-tag">샤브샤브</span></div><div class="tl-d">샤브마니아</div></div></div>
         <div class="tl"><span class="tl-t">13:40</span><div><div class="tl-n">제주동화마을</div><div class="tl-d">포토존·벽화마을 (야외)</div></div></div>
-        <div class="tl"><span class="tl-t">15:10</span><div><div class="tl-n">다이나믹메이즈 <span class="active-tag">액티비티</span></div><div class="tl-d">체험형 미로 탈출. 바지·양말 필수</div></div></div>
+        <div class="tl"><span class="tl-t">15:10</span><div><div class="tl-n">다이나믹메이즈<span class="active-tag">액티비티</span></div><div class="tl-d">체험형 미로 탈출. 바지·양말 필수</div></div></div>
         <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div></div></div>
       </div>
     </div>
@@ -420,7 +349,7 @@
   <div class="compare-box">
     <div class="compare-label">코스 비교</div>
     <table class="compare-table">
-      <thead><tr><th style="width:26%"></th><th style="color:var(--red)">인문팀</th><th style="color:var(--blue)">과학팀</th><th style="color:var(--purple)">예술팀</th></tr></thead>
+      <thead><tr><th style="width:26%"></th><th style="color:var(--red)">L-Team</th><th style="color:var(--blue)">E-Team</th><th style="color:var(--purple)">N-Team</th></tr></thead>
       <tbody>
         <tr><td>야외 비중</td><td>약 65%</td><td>약 55%</td><td>약 50%</td></tr>
         <tr><td>걷는 거리</td><td>보통</td><td>많음</td><td>보통</td></tr>
@@ -438,21 +367,21 @@
   <div style="font-size:11px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">이런 학생에게 잘 맞아요</div>
   <div class="fit-grid">
     <div class="fit-card">
-      <div class="fit-title" style="color:var(--red)">인문팀</div>
+      <div class="fit-title" style="color:var(--red)">L-Team</div>
       <div class="fit-item"><span>✓</span><span>역사·사회 이슈에 관심 있는 학생</span></div>
       <div class="fit-item"><span>✓</span><span>시장 탐방·먹거리를 즐기는 학생</span></div>
       <div class="fit-item"><span>✓</span><span>여유로운 일정을 선호하는 학생</span></div>
       <div class="fit-warn"><span>⚠</span><span>배 멀미가 심하면 신중히 선택</span></div>
     </div>
     <div class="fit-card">
-      <div class="fit-title" style="color:var(--blue)">과학팀</div>
+      <div class="fit-title" style="color:var(--blue)">E-Team</div>
       <div class="fit-item"><span>✓</span><span>자연·지질·생물에 관심 있는 학생</span></div>
       <div class="fit-item"><span>✓</span><span>활동적이고 걷기를 좋아하는 학생</span></div>
       <div class="fit-item"><span>✓</span><span>수족관·해양 생물에 흥미 있는 학생</span></div>
       <div class="fit-warn"><span>⚠</span><span>장거리 등반이 부담스러우면 주의</span></div>
     </div>
     <div class="fit-card">
-      <div class="fit-title" style="color:var(--purple)">예술팀</div>
+      <div class="fit-title" style="color:var(--purple)">N-Team</div>
       <div class="fit-item"><span>✓</span><span>예술·감성·미디어에 관심 있는 학생</span></div>
       <div class="fit-item"><span>✓</span><span>사진·포토존을 좋아하는 학생</span></div>
       <div class="fit-item"><span>✓</span><span>미로 탈출 등 액티비티를 즐기는 학생</span></div>
@@ -461,7 +390,7 @@
   </div>
 </section>
 
-<!-- ══ 코스 신청 ══ -->
+<!-- 코스 신청 -->
 <section id="tab-apply" class="tab-section">
   <div class="section-title">코스 신청</div>
   <div class="course-warning">
@@ -475,71 +404,66 @@
       <div class="check-item"><div class="check-num">2</div><span>야외 비중과 체력 난이도를 확인했나요?</span></div>
       <div class="check-item"><div class="check-num">3</div><span>특이사항(멀미·복장)을 확인했나요?</span></div>
       <div class="check-item"><div class="check-num">4</div><span>친구 따라가는 게 아니라, 내가 원하는 코스인가요?</span></div>
-      <div class="check-item"><div class="check-num">5</div><span>1,2,3지망을 다르게 정했나요?</span></div>
+      <div class="check-item"><div class="check-num">5</div><span>1·2·3지망을 모두 다르게 정했나요?</span></div>
     </div>
     <div class="apply-card">
       <div class="card-title">신청 안내</div>
       <div class="info-row"><span class="info-key">신청 기간</span><span class="info-val accent">7월 8일 ~ 7월 15일</span></div>
-      <div class="info-row"><span class="info-key">필수 입력</span><span class="info-val">학번 · 이름 · 1지망 · 2지망</span></div>
+      <div class="info-row"><span class="info-key">필수 입력</span><span class="info-val">학번 · 이름 · 1지망 · 2지망 · 3지망</span></div>
       <div class="info-row"><span class="info-key">결과 발표</span><span class="info-val">7월 16일 학급 공지</span></div>
       <div class="info-row"><span class="info-key">문의</span><span class="info-val">담임선생님 경유</span></div>
       <a class="apply-btn" href="https://forms.gle/DCGs4AEyqkcmYMi18" target="_blank">코스 신청하기 →</a>
-      <div class="apply-note">1지망·2지망·3지망 모두 입력 후 제출 · 중복 제출 금지</div>
+      <div class="apply-note">1·2·3지망 모두 입력 후 제출 · 중복 제출 금지</div>
     </div>
   </div>
   <div class="info-box">
     <strong style="color:var(--gray-5);">배정 방식 안내</strong><br>
-    1지망을 우선 배정합니다. 정원 초과 시 추첨으로 일부 학생이 2지망, 3지망으로 이동합니다.
-    1·2지망 모두 초과된 경우 나머지 코스에 자동 배정되며, 이 경우 미션 포인트 추가 지급 혜택이 제공됩니다.
+    1지망을 우선 배정합니다. 정원 초과 시 추첨으로 일부 학생이 2지망으로 이동합니다.
+    2지망도 초과된 경우 3지망 코스에 배정되며, 이 경우 미션 포인트 추가 지급 혜택이 제공됩니다.
   </div>
 </section>
 
 </main>
 
-<footer>용인삼계고등학교 2학년 · 2026 제주 수학여행</footer>
+<footer>용인삼계고등학교 2학년 · J.E.J.U. LENS 프로젝트 2026</footer>
 
 <script>
-// ── 탭 전환 ──
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
-
-// ── 일정 일차 전환 ──
-function switchDay(id, btn) {
-  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+function switchDay(id,btn){
+  document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
 }
 
-// ── 공지사항 Sheets 연동 ──
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_xO-7q6UCL85LVPKoyAPK7Y3GbJQEUURxGkcDy-5brHScbsSlQjS-ly1fKFYb8vpS3AwgRct5COuH/pub?output=csv';
+const SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_xO-7q6UCL85LVPKoyAPK7Y3GbJQEUURxGkcDy-5brHScbsSlQjS-ly1fKFYb8vpS3AwgRct5COuH/pub?output=csv';
 
-async function loadNotices() {
-  const container = document.getElementById('notice-list');
-  container.innerHTML = '<div class="notice-loading">불러오는 중...</div>';
-  if (!SHEET_CSV_URL) {
-    renderNotices([{ date:'설정 필요', type:'공지', title:'Google Sheets 연동 안내', body:'CSV URL을 등록하면 공지사항이 자동으로 표시됩니다.', important:'높음' }]);
+async function loadNotices(){
+  const container=document.getElementById('notice-list');
+  container.innerHTML='<div class="notice-loading">불러오는 중...</div>';
+  if(!SHEET_CSV_URL){
+    renderNotices([{date:'설정 필요',type:'공지',title:'Google Sheets 연동 안내',body:'CSV URL을 등록하면 공지사항이 자동으로 표시됩니다.',important:'높음'}]);
     return;
   }
-  try {
-    const res = await fetch(SHEET_CSV_URL);
-    const text = await res.text();
-    const rows = parseCSV(text).slice(1);
-    const notices = rows.filter(r => r[2]).map(r => ({ date:r[0]||'', type:r[1]||'공지', title:r[2]||'', body:r[3]||'', important:r[4]||'보통' })).reverse();
+  try{
+    const res=await fetch(SHEET_CSV_URL);
+    const text=await res.text();
+    const rows=parseCSV(text).slice(1);
+    const notices=rows.filter(r=>r[2]).map(r=>({date:r[0]||'',type:r[1]||'공지',title:r[2]||'',body:r[3]||'',important:r[4]||'보통'})).reverse();
     renderNotices(notices);
-  } catch(e) {
-    container.innerHTML = '<div class="notice-empty">공지사항을 불러올 수 없습니다.<br>잠시 후 새로고침해 주세요.</div>';
+  }catch(e){
+    container.innerHTML='<div class="notice-empty">공지사항을 불러올 수 없습니다.<br>잠시 후 새로고침해 주세요.</div>';
   }
 }
-
-function renderNotices(notices) {
-  const container = document.getElementById('notice-list');
-  if (!notices.length) { container.innerHTML = '<div class="notice-empty">등록된 공지사항이 없습니다.</div>'; return; }
-  container.innerHTML = notices.map(n => `
+function renderNotices(notices){
+  const container=document.getElementById('notice-list');
+  if(!notices.length){container.innerHTML='<div class="notice-empty">등록된 공지사항이 없습니다.</div>';return;}
+  container.innerHTML=notices.map(n=>`
     <div class="notice-item ${n.important==='높음'?'important':''}">
       <span class="notice-badge badge-${n.type}">${n.type}</span>
       <div class="notice-content">
@@ -549,19 +473,17 @@ function renderNotices(notices) {
       </div>
     </div>`).join('');
 }
-
-function parseCSV(text) {
-  return text.trim().split('\n').map(row => {
-    const result=[]; let cur=''; let inQ=false;
+function parseCSV(text){
+  return text.trim().split('\n').map(row=>{
+    const result=[];let cur='';let inQ=false;
     for(let i=0;i<row.length;i++){
       if(row[i]==='"'){inQ=!inQ;}
       else if(row[i]===','&&!inQ){result.push(cur.trim());cur='';}
       else{cur+=row[i];}
     }
-    result.push(cur.trim()); return result;
+    result.push(cur.trim());return result;
   });
 }
-
 loadNotices();
 </script>
 </body>
