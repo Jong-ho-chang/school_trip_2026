@@ -134,6 +134,48 @@
   .apply-btn:hover{background:var(--red-dk);}
   .apply-note{text-align:center;font-size:11px;color:var(--gray-4);margin-top:6px;}
   .info-box{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-2);padding:13px 16px;font-size:12.5px;color:var(--gray-4);line-height:1.7;box-shadow:var(--shadow);margin-top:14px;}
+
+  /* TEAM ASSIGNMENT */
+  .team-lead{background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;box-shadow:var(--shadow);}
+  .team-lead-title{font-weight:700;color:var(--gray-5);margin-bottom:4px;}
+  .team-lead-body{font-size:12.5px;color:var(--gray-4);}
+  .my-team-form{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:12px;}
+  .my-team-form select,.my-team-form input{width:100%;min-width:0;padding:10px 11px;border:1px solid var(--gray-2);border-radius:6px;background:#fff;font-family:inherit;font-size:14px;}
+  .my-team-form button{padding:10px 15px;border:0;border-radius:6px;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .my-team-result{display:none;margin-top:10px;padding:11px 12px;border-radius:6px;background:var(--gray-1);font-size:13px;}
+  .my-team-result.show{display:block;}
+  .team-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px;}
+  .team-summary-card{padding:12px 8px;border:1.5px solid var(--gray-2);border-radius:var(--radius);background:#fff;font-family:inherit;cursor:pointer;text-align:center;transition:all .2s;}
+  .team-summary-card span,.team-summary-card strong{display:block;}
+  .team-summary-card span{font-size:11.5px;margin-bottom:2px;}
+  .team-summary-card strong{font-size:18px;}
+  .team-summary-card.team-h.active{color:var(--red);border-color:var(--red);background:var(--red-lt);}
+  .team-summary-card.team-s.active{color:var(--blue);border-color:var(--blue);background:var(--blue-lt);}
+  .team-summary-card.team-a.active{color:var(--purple);border-color:var(--purple);background:var(--purple-lt);}
+  .team-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;}
+  .team-toolbar select{padding:8px 10px;border:1px solid var(--gray-2);border-radius:6px;background:#fff;font-family:inherit;font-size:13px;}
+  .team-status{font-size:11px;color:var(--gray-4);text-align:right;}
+  .team-class{background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);overflow:hidden;margin-bottom:8px;box-shadow:var(--shadow);}
+  .team-class summary{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;font-size:13px;font-weight:700;cursor:pointer;list-style:none;}
+  .team-class summary::-webkit-details-marker{display:none;}
+  .team-class summary::after{content:'＋';color:var(--gray-4);font-weight:400;}
+  .team-class[open] summary::after{content:'－';}
+  .team-class-count{margin-left:auto;margin-right:10px;color:var(--gray-4);font-size:11px;font-weight:400;}
+  .student-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-2);border-top:1px solid var(--gray-2);}
+  .student-item{background:#fff;padding:9px 11px;font-size:12.5px;}
+  .student-number{display:inline-block;min-width:31px;color:var(--gray-4);font-size:11px;}
+  .team-loading,.team-empty{text-align:center;padding:34px 12px;color:var(--gray-4);font-size:12.5px;}
+  .privacy-note{margin-top:13px;padding:10px 12px;border-radius:6px;background:var(--gold-lt);color:#7a5c00;font-size:11px;line-height:1.6;}
+  @media(max-width:480px){
+    .my-team-form{grid-template-columns:1fr 1fr;}
+    .my-team-form button{grid-column:1/-1;}
+    .team-summary{gap:6px;}
+    .team-summary-card{padding:10px 4px;}
+    .team-summary-card span{font-size:10.5px;}
+    .team-summary-card strong{font-size:16px;}
+    .student-grid{grid-template-columns:repeat(2,1fr);}
+    .team-toolbar{align-items:flex-end;}
+  }
   footer{text-align:center;padding:20px 0 40px;font-size:11px;color:var(--gray-3);}
   .mt12{margin-top:12px;}
 </style>
@@ -157,7 +199,7 @@
   <button class="active" onclick="switchTab('notice',this)">📢 공지사항</button>
   <button onclick="switchTab('schedule',this)">📅 전체 일정</button>
   <button onclick="switchTab('course',this)">🗺️ 코스 안내</button>
-  <button onclick="switchTab('apply',this)">📝 코스 신청</button>
+  <button onclick="switchTab('teams',this)">👥 팀 배정</button>
 </nav>
 
 <main>
@@ -214,7 +256,7 @@
   <!-- 2일차 -->
   <div id="day2" class="day-panel">
     <div style="background:var(--gold-lt);border:1px solid #f0d080;border-radius:var(--radius);padding:10px 14px;font-size:13px;color:#7a5c00;margin-bottom:14px;display:flex;gap:8px;">
-      <span>🗺️</span><span>2일차는 학생 희망에 따라 <strong>L·E·N-Team</strong>으로 나뉘어 운영됩니다. 코스 신청 탭에서 신청하세요.</span>
+      <span>🗺️</span><span>2일차는 <strong>L·E·N-Team</strong>으로 나뉘어 운영됩니다. 본인의 배정 결과는 팀 배정 탭에서 확인하세요.</span>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
       <div class="sched-card">
@@ -303,7 +345,7 @@
 <section id="tab-course" class="tab-section">
   <div class="course-warning">
     <span>⚠</span>
-    <span>코스 정원: L-Team <strong>85명 내외</strong> · E-Team <strong>85명 내외</strong> · N-Team <strong>85명 내외</strong>. 1·2·3지망 모두 작성해야 신청이 완료됩니다.</span>
+    <span>코스별 최종 배정 인원과 명단은 <strong>팀 배정</strong> 탭에서 확인하세요. 스프레드시트의 변경 내용이 명단에 반영됩니다.</span>
   </div>
   <div class="day2-grid">
     <div class="course-card">
@@ -398,37 +440,48 @@
   </div>
 </section>
 
-<!-- 코스 신청 -->
-<section id="tab-apply" class="tab-section">
-  <div class="section-title">코스 신청</div>
-  <div class="course-warning">
-    <span>📌</span>
-    <span>신청 전 <strong>코스 안내</strong> 탭을 반드시 먼저 읽어주세요. 1·2·3지망 모두 작성해야 신청이 완료됩니다.</span>
+<!-- 팀 배정 -->
+<section id="tab-teams" class="tab-section">
+  <div class="section-title">팀 배정 확인</div>
+  <div class="team-lead">
+    <div class="team-lead-title">내 팀 빠르게 찾기</div>
+    <div class="team-lead-body">학급과 번호를 입력하면 배정 팀을 바로 확인할 수 있습니다.</div>
+    <form class="my-team-form" onsubmit="findMyTeam(event)">
+      <select id="my-class" aria-label="학급 선택" required>
+        <option value="">학급 선택</option>
+        <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option>
+        <option value="4">4반</option><option value="5">5반</option><option value="6">6반</option>
+        <option value="7">7반</option><option value="8">8반</option><option value="9">9반</option>
+      </select>
+      <input id="my-number" type="number" min="1" max="50" inputmode="numeric" placeholder="번호" aria-label="번호 입력" required>
+      <button type="submit">내 팀 확인</button>
+    </form>
+    <div id="my-team-result" class="my-team-result" aria-live="polite"></div>
   </div>
-  <div class="bottom-grid mt12">
-    <div class="check-card">
-      <div class="card-title">신청 전 체크리스트</div>
-      <div class="check-item"><div class="check-num">1</div><span>코스 안내를 처음부터 끝까지 읽었나요?</span></div>
-      <div class="check-item"><div class="check-num">2</div><span>야외 비중과 체력 난이도를 확인했나요?</span></div>
-      <div class="check-item"><div class="check-num">3</div><span>특이사항(멀미·복장)을 확인했나요?</span></div>
-      <div class="check-item"><div class="check-num">4</div><span>친구 따라가는 게 아니라, 내가 원하는 코스인가요?</span></div>
-      <div class="check-item"><div class="check-num">5</div><span>1·2·3지망을 모두 다르게 정했나요?</span></div>
-    </div>
-    <div class="apply-card">
-      <div class="card-title">신청 안내</div>
-      <div class="info-row"><span class="info-key">신청 기간</span><span class="info-val accent">7월 8일 ~ 7월 15일</span></div>
-      <div class="info-row"><span class="info-key">필수 입력</span><span class="info-val">학번 · 이름 · 1지망 · 2지망 · 3지망</span></div>
-      <div class="info-row"><span class="info-key">결과 발표</span><span class="info-val">7월 16일 학급 공지</span></div>
-      <div class="info-row"><span class="info-key">문의</span><span class="info-val">담임선생님 경유</span></div>
-      <a class="apply-btn" href="https://forms.gle/DCGs4AEyqkcmYMi18" target="_blank">코스 신청하기 →</a>
-      <div class="apply-note">1·2·3지망 모두 입력 후 제출 · 중복 제출 금지</div>
-    </div>
+
+  <div class="team-summary" aria-label="팀 선택">
+    <button class="team-summary-card team-h active" type="button" onclick="selectTeam('humanities',this)">
+      <span>L-Team · 인문</span><strong id="count-humanities">-</strong>
+    </button>
+    <button class="team-summary-card team-s" type="button" onclick="selectTeam('science',this)">
+      <span>E-Team · 자연</span><strong id="count-science">-</strong>
+    </button>
+    <button class="team-summary-card team-a" type="button" onclick="selectTeam('arts',this)">
+      <span>N-Team · 예술</span><strong id="count-arts">-</strong>
+    </button>
   </div>
-  <div class="info-box">
-    <strong style="color:var(--gray-5);">배정 방식 안내</strong><br>
-    1지망을 우선 배정합니다. 정원 초과 시 추첨으로 일부 학생이 2지망으로 이동합니다.
-    2지망도 초과된 경우 3지망 코스에 배정되며, 이 경우 미션 포인트 추가 지급 혜택이 제공됩니다.
+
+  <div class="team-toolbar">
+    <select id="team-class-filter" onchange="renderTeamList()" aria-label="명단 학급 필터">
+      <option value="all">전체 학급</option>
+      <option value="1">1반</option><option value="2">2반</option><option value="3">3반</option>
+      <option value="4">4반</option><option value="5">5반</option><option value="6">6반</option>
+      <option value="7">7반</option><option value="8">8반</option><option value="9">9반</option>
+    </select>
+    <div id="team-status" class="team-status">명단을 불러오는 중...</div>
   </div>
+  <div id="team-list"><div class="team-loading">팀 명단을 불러오는 중...</div></div>
+  <div class="privacy-note">학생 개인정보 보호를 위해 이름 가운데 글자를 가렸습니다. 이 명단은 배정 확인 용도이며 캡처하거나 외부에 공유하지 마세요.</div>
 </section>
 
 </main>
@@ -441,6 +494,7 @@ function switchTab(id,btn){
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
+  if(id==='teams')loadTeamStudents();
 }
 function switchDay(id,btn){
   document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
@@ -450,6 +504,16 @@ function switchDay(id,btn){
 }
 
 const SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_xO-7q6UCL85LVPKoyAPK7Y3GbJQEUURxGkcDy-5brHScbsSlQjS-ly1fKFYb8vpS3AwgRct5COuH/pub?output=csv';
+
+// apps-script/team-api.gs를 웹 앱으로 배포한 뒤 /exec 주소를 입력하세요.
+const TEAM_API_URL='';
+const TEAM_META={
+  humanities:{label:'L-Team · 인문'},
+  science:{label:'E-Team · 자연'},
+  arts:{label:'N-Team · 예술'}
+};
+let teamStudents=[];
+let selectedTeam='humanities';
 
 async function loadNotices(){
   const container=document.getElementById('notice-list');
@@ -491,6 +555,77 @@ function parseCSV(text){
     }
     result.push(cur.trim());return result;
   });
+}
+function escapeHTML(value){
+  return String(value).replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+}
+async function loadTeamStudents(){
+  const list=document.getElementById('team-list');
+  const status=document.getElementById('team-status');
+  if(!TEAM_API_URL){
+    list.innerHTML='<div class="team-empty">팀 명단 API 주소 설정이 필요합니다.</div>';
+    status.textContent='연동 준비 중';
+    return;
+  }
+  try{
+    const joiner=TEAM_API_URL.includes('?')?'&':'?';
+    const response=await fetch(`${TEAM_API_URL}${joiner}t=${Date.now()}`,{cache:'no-store'});
+    if(!response.ok)throw new Error('HTTP '+response.status);
+    const payload=await response.json();
+    if(!payload.ok||!Array.isArray(payload.students))throw new Error(payload.error||'잘못된 응답');
+    teamStudents=payload.students.map(s=>({
+      classNo:Number(s.classNo),number:Number(s.number),name:String(s.name||''),team:String(s.team||'')
+    })).filter(s=>s.classNo&&s.number&&TEAM_META[s.team]);
+    Object.keys(TEAM_META).forEach(team=>{
+      document.getElementById('count-'+team).textContent=teamStudents.filter(s=>s.team===team).length+'명';
+    });
+    status.textContent=`${teamStudents.length}명 · 방금 불러옴`;
+    renderTeamList();
+  }catch(error){
+    list.innerHTML='<div class="team-empty">팀 명단을 불러올 수 없습니다.<br>잠시 후 다시 시도해 주세요.</div>';
+    status.textContent='불러오기 실패';
+  }
+}
+function selectTeam(team,button){
+  selectedTeam=team;
+  document.querySelectorAll('.team-summary-card').forEach(card=>card.classList.remove('active'));
+  button.classList.add('active');
+  document.getElementById('team-class-filter').value='all';
+  renderTeamList();
+}
+function findMyTeam(event){
+  event.preventDefault();
+  const classNo=Number(document.getElementById('my-class').value);
+  const number=Number(document.getElementById('my-number').value);
+  const result=document.getElementById('my-team-result');
+  if(!teamStudents.length){
+    result.textContent='명단을 아직 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';
+  }else{
+    const student=teamStudents.find(s=>s.classNo===classNo&&s.number===number);
+    result.innerHTML=student
+      ? `<strong>${classNo}반 ${String(number).padStart(2,'0')}번 ${escapeHTML(student.name)}</strong> 학생은 <strong>${TEAM_META[student.team].label}</strong>입니다.`
+      : '해당 학급·번호의 배정 기록이 없습니다. 불참 여부 또는 입력 내용을 확인해 주세요.';
+  }
+  result.classList.add('show');
+}
+function renderTeamList(){
+  const list=document.getElementById('team-list');
+  if(!teamStudents.length)return;
+  const classFilter=document.getElementById('team-class-filter').value;
+  const filtered=teamStudents.filter(s=>s.team===selectedTeam&&(classFilter==='all'||String(s.classNo)===classFilter));
+  if(!filtered.length){list.innerHTML='<div class="team-empty">해당 학급의 배정 학생이 없습니다.</div>';return;}
+  const grouped=filtered.reduce((result,student)=>{
+    (result[student.classNo]??=[]).push(student);return result;
+  },{});
+  list.innerHTML=Object.entries(grouped).sort((a,b)=>Number(a[0])-Number(b[0])).map(([classNo,students])=>`
+    <details class="team-class" ${classFilter!=='all'?'open':''}>
+      <summary><span>${classNo}반</span><span class="team-class-count">${students.length}명</span></summary>
+      <div class="student-grid">
+        ${students.sort((a,b)=>a.number-b.number).map(student=>`
+          <div class="student-item"><span class="student-number">${String(student.number).padStart(2,'0')}번</span>${escapeHTML(student.name)}</div>
+        `).join('')}
+      </div>
+    </details>`).join('');
 }
 loadNotices();
 </script>
