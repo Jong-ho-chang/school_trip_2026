@@ -169,6 +169,17 @@
   .student-number{display:inline-block;min-width:31px;color:var(--gray-4);font-size:11px;}
   .team-loading,.team-empty{text-align:center;padding:34px 12px;color:var(--gray-4);font-size:12.5px;}
   .privacy-note{margin-top:13px;padding:10px 12px;border-radius:6px;background:var(--gold-lt);color:#7a5c00;font-size:11px;line-height:1.6;}
+
+  /* BUS & ROOM LOOKUP */
+  .lookup-result{display:none;background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);padding:14px 16px;margin-bottom:4px;box-shadow:var(--shadow);}
+  .lookup-result.show{display:block;}
+  .lookup-student{font-weight:700;font-size:14px;margin-bottom:8px;color:var(--gray-5);}
+  .lookup-row{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--gray-2);font-size:13px;align-items:baseline;}
+  .lookup-key{flex:0 0 128px;color:var(--gray-4);font-size:12px;}
+  .lookup-val{font-weight:500;}
+  .lookup-sub{color:var(--gray-4);font-weight:400;font-size:12px;}
+  .lookup-error{color:var(--red);font-weight:500;}
+  @media(max-width:480px){.lookup-key{flex-basis:104px;}}
   @media(max-width:480px){
     .my-team-form{grid-template-columns:1fr 1fr;}
     .my-team-form button{grid-column:1/-1;}
@@ -205,6 +216,7 @@
   <button onclick="switchTab('schedule',this)">📅 전체 일정</button>
   <button onclick="switchTab('course',this)">🗺️ 코스 안내</button>
   <button onclick="switchTab('teams',this)">👥 팀 배정</button>
+  <button onclick="switchTab('lookup',this)">🚌 버스·숙소</button>
 </nav>
 
 <main>
@@ -492,6 +504,25 @@
   <div class="privacy-note">학생 개인정보 보호를 위해 이름 가운데 글자를 가렸습니다. 이 명단은 배정 확인 용도이며 캡처하거나 외부에 공유하지 마세요.</div>
 </section>
 
+<!-- 버스·숙소 조회 -->
+<section id="tab-lookup" class="tab-section">
+  <div class="section-title">버스·숙소 조회</div>
+  <div class="team-lead">
+    <div class="team-lead-title">내 버스 · 내 방 확인</div>
+    <div class="team-lead-body">학번(5자리)과 이름을 입력하면 본인의 버스 호차와 숙소 호실을 확인할 수 있습니다.</div>
+    <form class="my-team-form" onsubmit="findMyTrip(event)">
+      <input id="lookup-id" inputmode="numeric" pattern="\d{5}" maxlength="5" placeholder="학번 (예: 20315)" aria-label="학번 입력" required>
+      <input id="lookup-name" maxlength="10" placeholder="이름" aria-label="이름 입력" required>
+      <button type="submit" id="lookup-btn">조회</button>
+    </form>
+    <div id="lookup-status" class="my-team-result" aria-live="polite"></div>
+  </div>
+
+  <div id="lookup-result" class="lookup-result" aria-live="polite"></div>
+
+  <div class="privacy-note">본인 확인(학번+이름 일치) 후 본인 정보만 표시됩니다. 조회 결과를 캡처해 외부에 공유하지 마세요. 숙소 호실은 담임 선생님 입력이 완료된 뒤부터 표시됩니다.</div>
+</section>
+
 </main>
 
 <footer>용인삼계고등학교 2학년 · J.E.J.U. LENS 프로젝트 2026</footer>
@@ -671,6 +702,75 @@ function renderTeamList(){
       </div>
     </details>`).join('');
 }
+/* ── 버스·숙소 개인 조회 ─────────────────────────────
+   조회API(Code.gs)를 "독립 프로젝트"로 배포한 뒤
+   발급된 /exec 주소를 아래에 붙여넣으세요. */
+const LOOKUP_API_URL='https://script.google.com/macros/s/AKfycbwrngZpeWo8_lxyGZ_teqC8i8VYE0Pf-C4ifonKuOJ0aQOc7YgyVFsVN23g2EnCn6Yq/exec';
+
+let lookupRequestSequence=0;
+async function findMyTrip(event){
+  event.preventDefault();
+  const id=document.getElementById('lookup-id').value.trim();
+  const name=document.getElementById('lookup-name').value.trim();
+  const btn=document.getElementById('lookup-btn');
+  const status=document.getElementById('lookup-status');
+  const box=document.getElementById('lookup-result');
+
+  box.classList.remove('show');
+  if(!LOOKUP_API_URL){
+    status.textContent='조회 API 주소 설정이 필요합니다. (관리자: LOOKUP_API_URL)';
+    status.classList.add('show');
+    return;
+  }
+  status.textContent='조회 중입니다...';
+  status.classList.add('show');
+  btn.disabled=true;
+
+  try{
+    const d=await fetchLookup(id,name);
+    if(!d.ok){
+      status.innerHTML=`<span class="lookup-error">${escapeHTML(d.message||'조회에 실패했습니다.')}</span>`;
+      return;
+    }
+    status.classList.remove('show');
+    const roomHTML=d.room
+      ? `<span class="lookup-val">${escapeHTML(d.room)}호</span>`+
+        (d.mates&&d.mates.length?` <span class="lookup-sub">같은 방: ${d.mates.map(escapeHTML).join(', ')}</span>`:'')
+      : `<span class="lookup-sub">아직 배정 입력 전입니다.</span>`;
+    box.innerHTML=`
+      <div class="lookup-student">${d.ban}반 ${String(d.num).padStart(2,'0')}번 ${escapeHTML(d.name)}</div>
+      <div class="lookup-row"><span class="lookup-key">① 학교 → 공항</span><span class="lookup-val">${escapeHTML(d.bus1)}</span></div>
+      <div class="lookup-row"><span class="lookup-key">② 2일차 현지 코스</span><span class="lookup-val">${escapeHTML(d.bus2)}</span></div>
+      <div class="lookup-row"><span class="lookup-key">③ 귀가 버스</span><span class="lookup-val">${escapeHTML(d.bus3)}</span>${d.drop?` <span class="lookup-sub">${escapeHTML(d.drop)} 하차</span>`:''}</div>
+      <div class="lookup-row"><span class="lookup-key">🏨 숙소</span><span>${roomHTML}</span></div>`;
+    box.classList.add('show');
+  }catch(err){
+    console.error('버스·숙소 조회 오류:',err);
+    status.innerHTML='<span class="lookup-error">서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.</span>';
+  }finally{
+    btn.disabled=false;
+  }
+}
+async function fetchLookup(id,name){
+  const qs=`id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
+  try{
+    const res=await fetch(`${LOOKUP_API_URL}?${qs}`);
+    return await res.json();
+  }catch(e){
+    // fetch가 막히는 환경(구형 브라우저 등)을 위한 JSONP 폴백
+    return new Promise((resolve,reject)=>{
+      const cb='receiveLookup_'+(++lookupRequestSequence);
+      const script=document.createElement('script');
+      const timeout=setTimeout(()=>{cleanup();reject(new Error('timeout'));},10000);
+      function cleanup(){clearTimeout(timeout);script.remove();delete window[cb];}
+      window[cb]=p=>{cleanup();resolve(p);};
+      script.onerror=()=>{cleanup();reject(new Error('connect'));};
+      script.src=`${LOOKUP_API_URL}?${qs}&callback=${cb}&t=${Date.now()}`;
+      document.head.appendChild(script);
+    });
+  }
+}
+
 loadNotices();
 </script>
 </body>
