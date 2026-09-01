@@ -165,8 +165,9 @@
   .team-class[open] summary::after{content:'－';}
   .team-class-count{margin-left:auto;margin-right:10px;color:var(--gray-4);font-size:11px;font-weight:400;}
   .student-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-2);border-top:1px solid var(--gray-2);}
-  .student-item{background:#fff;padding:9px 11px;font-size:12.5px;}
-  .student-number{display:inline-block;min-width:31px;color:var(--gray-4);font-size:11px;}
+  .student-item{background:#fff;padding:9px 11px;font-size:12.5px;display:flex;align-items:center;gap:2px;}
+  .student-number{display:inline-block;min-width:31px;color:var(--gray-4);font-size:11px;flex-shrink:0;}
+  .student-bus{margin-left:auto;flex-shrink:0;font-size:10px;color:var(--gray-4);background:var(--gray-1);border:1px solid var(--gray-2);border-radius:3px;padding:0 5px;line-height:1.7;white-space:nowrap;}
   .team-loading,.team-empty{text-align:center;padding:34px 12px;color:var(--gray-4);font-size:12.5px;}
   .privacy-note{margin-top:13px;padding:10px 12px;border-radius:6px;background:var(--gold-lt);color:#7a5c00;font-size:11px;line-height:1.6;}
 
@@ -216,7 +217,7 @@
   <button onclick="switchTab('schedule',this)">📅 전체 일정</button>
   <button onclick="switchTab('course',this)">🗺️ 코스 안내</button>
   <button onclick="switchTab('teams',this)">👥 팀 배정</button>
-  <button onclick="switchTab('lookup',this)">🚌 버스·숙소 조회</button>
+  <button onclick="switchTab('lookup',this)">🚌 버스·숙소</button>
 </nav>
 
 <main>
@@ -555,6 +556,8 @@ let teamStudents=[];
 let selectedTeam='humanities';
 let expandAllTeamClasses=false;
 let teamRequestSequence=0;
+let bus2Map={};        // "반-번호" -> 2일차 호차
+let bus2Loaded=false;
 
 async function loadNotices(){
   const container=document.getElementById('notice-list');
@@ -610,6 +613,7 @@ async function loadTeamStudents(){
   }
   list.innerHTML='<div class="team-loading">팀 명단을 불러오는 중...</div>';
   status.textContent='불러오는 중...';
+  loadBus2Map(); // 2일차 호차 정보는 병렬로 (실패해도 명단 표시에는 지장 없음)
   try{
     const payload=await loadTeamDataWithJsonp();
     if(!payload.ok||!Array.isArray(payload.students))throw new Error(payload.error||'잘못된 응답');
@@ -696,9 +700,11 @@ function renderTeamList(){
     <details class="team-class" ${expandAllTeamClasses||classFilter!=='all'?'open':''}>
       <summary><span>${classNo}반</span><span class="team-class-count">${students.length}명</span></summary>
       <div class="student-grid">
-        ${students.sort((a,b)=>a.number-b.number).map(student=>`
-          <div class="student-item"><span class="student-number">${String(student.number).padStart(2,'0')}번</span>${escapeHTML(student.name)}</div>
-        `).join('')}
+        ${students.sort((a,b)=>a.number-b.number).map(student=>{
+          const bus=bus2Map[student.classNo+'-'+student.number];
+          const busTag=bus!=null&&bus!==''?`<span class="student-bus">${typeof bus==='number'?bus+'호차':escapeHTML(String(bus))}</span>`:'';
+          return `<div class="student-item"><span class="student-number">${String(student.number).padStart(2,'0')}번</span><span>${escapeHTML(student.name)}</span>${busTag}</div>`;
+        }).join('')}
       </div>
     </details>`).join('');
 }
@@ -751,8 +757,23 @@ async function findMyTrip(event){
     btn.disabled=false;
   }
 }
+async function loadBus2Map(){
+  if(bus2Loaded||!LOOKUP_API_URL)return;
+  try{
+    const d=await fetchFromLookupApi('mode=bus2');
+    if(d.ok&&Array.isArray(d.rows)){
+      d.rows.forEach(r=>{bus2Map[r.c+'-'+r.n]=r.b;});
+      bus2Loaded=true;
+      if(teamStudents.length)renderTeamList(); // 명단이 먼저 그려졌으면 호차 배지 다시 반영
+    }
+  }catch(e){
+    console.warn('2일차 호차 정보를 불러오지 못했습니다.',e);
+  }
+}
 async function fetchLookup(id,name){
-  const qs=`id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
+  return fetchFromLookupApi(`id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`);
+}
+async function fetchFromLookupApi(qs){
   try{
     const res=await fetch(`${LOOKUP_API_URL}?${qs}`);
     return await res.json();
