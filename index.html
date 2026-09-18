@@ -193,6 +193,90 @@
     .team-toolbar-controls{align-items:stretch;}
     .team-toolbar select,.team-toggle-all{min-height:38px;}
   }
+  /* BOOKLET & MISSIONS */
+  .bk-me .team-lead-title{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;}
+  .bk-me-sub{font-size:11px;font-weight:400;color:var(--gray-4);}
+  .bk-me-form{grid-template-columns:1fr 1fr auto;}
+  @media(max-width:480px){.bk-me-form{grid-template-columns:1fr 1fr;}.bk-me-form button{grid-column:1/-1;}}
+  .bk-course-filter{display:flex;gap:6px;margin-bottom:14px;}
+  .bk-filter{flex:1;padding:8px 4px;border-radius:var(--radius);border:1.5px solid var(--gray-2);background:#fff;font-family:inherit;font-size:13px;font-weight:500;color:var(--gray-4);cursor:pointer;}
+  .bk-filter.active{border-color:var(--red);background:var(--red-lt);color:var(--red);}
+  .bk-day-label{font-size:11px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.5px;margin:18px 0 8px;}
+  .bk-course-group{margin-bottom:14px;}
+  .bk-course-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;}
+  .bk-course-meta{font-size:11px;color:var(--gray-4);}
+  .bk-card-list{display:flex;flex-direction:column;gap:8px;}
+  .bk-card{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);padding:10px 12px 10px 10px;box-shadow:var(--shadow);text-decoration:none;color:inherit;}
+  .bk-card:active{background:var(--gray-1);}
+  .bk-card-img{width:64px;height:64px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--gray-2);}
+  .bk-card-noimg{display:flex;align-items:center;justify-content:center;color:var(--gray-3);font-size:20px;}
+  .bk-card-body{flex:1;min-width:0;}
+  .bk-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+  .bk-card-pts{font-size:11px;color:var(--gray-4);}
+  .bk-card-name{font-weight:700;font-size:14.5px;color:var(--gray-5);}
+  .bk-card-cap{font-size:11.5px;color:var(--gray-4);line-height:1.45;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+  .bk-card-arrow{color:var(--gray-3);font-size:20px;flex-shrink:0;}
+  .bk-day3{background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);box-shadow:var(--shadow);}
+  .bk-day3-item{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--gray-2);font-size:13px;}
+  .bk-day3-item:last-child{border-bottom:none;}
+  .bk-day3-item span{color:var(--gray-4);font-size:12px;text-align:right;}
+  .bk-acc summary span{font-size:13.5px;}
+  .bk-acc-body{padding:4px 16px 16px;font-size:13px;line-height:1.7;border-top:1px solid var(--gray-2);}
+  .bk-acc-body h4{font-size:12px;color:var(--gray-4);margin:14px 0 4px;text-transform:uppercase;letter-spacing:0.4px;}
+  .bk-acc-body h4:first-child{margin-top:8px;}
+  .bk-acc-body p{margin:4px 0;}
+  .bk-lead{font-weight:500;color:var(--gray-5);}
+  .bk-note{font-size:12px;color:var(--gray-4);}
+  .bk-todo{color:#c77800;background:var(--gold-lt);border-radius:3px;padding:0 4px;}
+  .bk-list{padding-left:18px;margin:4px 0;} .bk-list li{margin-bottom:3px;}
+  .bk-check{list-style:none;padding:0;margin:4px 0;}
+  .bk-check li{padding-left:24px;position:relative;margin-bottom:4px;}
+  .bk-check li::before{content:'';position:absolute;left:2px;top:5px;width:12px;height:12px;border:1.5px solid var(--gray-3);border-radius:3px;}
+  .bk-steps{padding-left:22px;margin:4px 0;} .bk-steps li{margin-bottom:3px;}
+  .bk-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0;}
+  .bk-table th,.bk-table td{padding:6px 8px;border-bottom:1px solid var(--gray-2);text-align:center;}
+  .bk-table th{font-weight:500;color:var(--gray-4);font-size:11px;}
+  .bk-table td:first-child{text-align:left;font-weight:500;}
+  .bk-credits td{text-align:left;}
+  .bk-callout{background:var(--red-lt);border-left:3px solid var(--red);border-radius:6px;padding:10px 12px;margin:8px 0;}
+  .bk-emergency{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0;}
+  .bk-emergency a{display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:var(--radius);background:var(--red);color:#fff;text-decoration:none;}
+  .bk-emergency a strong{font-size:26px;line-height:1;} .bk-emergency a span{font-size:11px;opacity:.85;margin-top:3px;}
+  /* place page */
+  .bk-back{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .bk-back a{font-size:13px;color:var(--gray-4);text-decoration:none;}
+  .bk-place-name{font-family:'Noto Serif KR',serif;font-size:22px;font-weight:700;color:var(--gray-5);margin-bottom:2px;}
+  .bk-place-cap{font-size:12.5px;color:var(--gray-4);margin-bottom:12px;}
+  .bk-hero{margin:0 0 14px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray-2);background:#fff;}
+  .bk-hero img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;}
+  .bk-hero figcaption{font-size:10.5px;color:var(--gray-4);padding:5px 10px;text-align:right;}
+  .bk-hero-empty{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--gray-3);font-size:12px;background:var(--purple-lt);border-color:transparent;}
+  .bk-hero-empty span:first-child{font-size:26px;}
+  .bk-sec{background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);padding:13px 16px;margin-bottom:10px;box-shadow:var(--shadow);font-size:13px;line-height:1.7;}
+  .bk-sec h3{font-size:12px;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+  .bk-sec-sub{font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;}
+  .bk-caution{border-left:3px solid var(--gold);}
+  .bk-source{font-size:11px;color:var(--gray-3);text-align:right;margin:-4px 2px 12px;}
+  .bk-mission{border:1px solid var(--gray-2);border-radius:var(--radius);padding:12px 13px;margin-top:10px;background:var(--gray-1);}
+  .bk-mission-head{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
+  .bk-pts{font-size:13px;font-weight:700;color:#fff;background:var(--gray-5);border-radius:4px;padding:1px 8px;}
+  .bk-mission:nth-child(2) .bk-pts{background:var(--gray-4);} .bk-mission:nth-child(3) .bk-pts{background:var(--gold);} .bk-mission:nth-child(4) .bk-pts{background:var(--red);}
+  .bk-diff{font-size:11px;color:var(--gray-4);}
+  .bk-video{font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-lt);border-radius:3px;padding:1px 6px;}
+  .bk-mission-text{font-size:13.5px;line-height:1.65;color:var(--text);margin:0 0 6px;}
+  .bk-mission-submit{font-size:12px;color:var(--gray-4);margin-bottom:10px;}
+  .bk-draft{margin-bottom:10px;}
+  .bk-draft summary{font-size:12px;color:var(--gray-4);cursor:pointer;list-style:none;}
+  .bk-draft summary::-webkit-details-marker{display:none;}
+  .bk-draft summary span{font-size:10.5px;}
+  .bk-draft textarea{width:100%;margin-top:8px;padding:9px 10px;border:1px solid var(--gray-2);border-radius:6px;font-family:inherit;font-size:13px;line-height:1.6;resize:vertical;background:#fff;}
+  .bk-draft-tools{display:flex;justify-content:space-between;align-items:center;margin-top:4px;}
+  .bk-count{font-size:11px;color:var(--gray-4);}
+  .bk-copy{padding:4px 10px;border:1px solid var(--gray-2);border-radius:4px;background:#fff;font-family:inherit;font-size:11.5px;cursor:pointer;color:var(--gray-5);}
+  .bk-submit{font-size:13.5px;}
+  .bk-submit-off{background:var(--gray-3);cursor:not-allowed;font-size:12.5px;}
+  .bk-pn{display:flex;justify-content:space-between;gap:10px;margin:14px 0 4px;}
+  .bk-pn a{font-size:13px;color:var(--gray-5);text-decoration:none;background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);padding:9px 13px;}
   footer{text-align:center;padding:20px 0 40px;font-size:11px;color:var(--gray-3);}
   .mt12{margin-top:12px;}
 </style>
@@ -214,6 +298,7 @@
 
 <nav>
   <button class="active" onclick="switchTab('notice',this)">📢 공지사항</button>
+  <button id="nav-booklet" onclick="switchTab('booklet',this)">📖 자료집·미션</button>
   <button onclick="switchTab('schedule',this)">📅 전체 일정</button>
   <button onclick="switchTab('course',this)">🗺️ 코스 안내</button>
   <button onclick="switchTab('teams',this)">👥 팀 배정</button>
@@ -231,6 +316,11 @@
   <div id="notice-list" class="notice-list">
     <div class="notice-loading">공지사항을 불러오는 중...</div>
   </div>
+</section>
+
+<!-- 자료집 · 미션 (내용은 booklet-data.js, 화면은 booklet.js) -->
+<section id="tab-booklet" class="tab-section">
+  <div id="booklet-root"><div class="team-loading">자료집을 불러오는 중...</div></div>
 </section>
 
 <!-- 전체 일정 -->
@@ -535,6 +625,11 @@ function switchTab(id,btn){
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
   if(id==='teams')loadTeamStudents();
+  if(id==='booklet'){
+    if(!/^#place\//.test(location.hash)&&typeof window.bookletShowList==='function')window.bookletShowList();
+  }else if(/^#(booklet|place\/)/.test(location.hash)){
+    history.replaceState(null,'',location.pathname+location.search);
+  }
 }
 function switchDay(id,btn){
   document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
@@ -794,5 +889,7 @@ async function fetchFromLookupApi(qs){
 
 loadNotices();
 </script>
+<script src="booklet-data.js"></script>
+<script src="booklet.js"></script>
 </body>
 </html>
