@@ -54,6 +54,9 @@
     const m = h.match(/^place\/([a-z0-9-]+)(?:\/(\d+))?$/i);
     if (m) return { view: 'place', id: m[1], mission: m[2] ? parseInt(m[2], 10) : 0 };
     if (h === 'booklet') return { view: 'list' };
+    const sm = h.match(/^safety(?:\/([a-z0-9-]+))?$/i);
+    if (sm) return { view: 'safety', section: sm[1] || '' };
+    if (h === 'checklist') return { view: 'checklist' };
     return null;
   }
   function activateBookletTab() {
@@ -62,12 +65,23 @@
       window.switchTab('booklet', btn);
     }
   }
+  function activateSafetyTab() {
+    const btn = $('#nav-safety');
+    if (btn && !btn.classList.contains('active') && typeof window.switchTab === 'function') {
+      window.switchTab('safety', btn);
+    }
+  }
   function route() {
     const r = parseHash();
     if (!r) return;
-    activateBookletTab();
-    if (r.view === 'place') renderPlace(r.id, r.mission);
-    else renderList();
+    if (r.view === 'safety' || r.view === 'checklist') {
+      activateSafetyTab();
+      renderSafety(r.view === 'checklist' ? 'checklist' : r.section);
+    } else {
+      activateBookletTab();
+      if (r.view === 'place') renderPlace(r.id, r.mission);
+      else renderList();
+    }
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
@@ -126,7 +140,7 @@
 
     html += `<div class="bk-day-label">3일차 · 10월 16일 (금) · 미션 없음</div>
       <div class="bk-day3">
-        ${B.day3.map(d => `<div class="bk-day3-item"><strong>${esc(d.name)}</strong><span>${d.todo && d.todo.length ? esc(d.todo.join(' · ')) : "'여기서 해볼 것' 준비 중"}</span></div>`).join('')}
+        ${B.day3.map(d => `<div class="bk-day3-item"><strong>${esc(d.name)}</strong><span>${d.todo && d.todo.length ? esc(d.todo.join(' · ')) : (d.caution ? '⚠ ' + esc(d.caution) : "'여기서 해볼 것' 준비 중")}</span></div>`).join('')}
       </div>`;
 
     html += `<div class="bk-day-label">공통 안내</div>
@@ -252,10 +266,118 @@
     }
   }
 
+
+  /* ---------- 안전 · 체크리스트 화면 ---------- */
+  const CK_KEY = 'jeju2026.checklist';
+  const CK_COURSE_KEY = 'jeju2026.course';
+  function loadChecks() { try { return JSON.parse(localStorage.getItem(CK_KEY) || '{}'); } catch (e) { return {}; } }
+  function saveChecks(v) { try { localStorage.setItem(CK_KEY, JSON.stringify(v)); } catch (e) { /* 무시 */ } }
+  function loadCourse() { try { return localStorage.getItem(CK_COURSE_KEY) || ''; } catch (e) { return ''; } }
+  function saveCourse(v) { try { localStorage.setItem(CK_COURSE_KEY, v); } catch (e) { /* 무시 */ } }
+
+  function checklistHtml() {
+    const checks = loadChecks();
+    const course = loadCourse();
+    const visible = (it) => !it.course || it.course === course;
+    let total = 0, done = 0;
+    const groups = B.checklist.map(g => {
+      const items = g.items.filter(visible);
+      const gd = items.filter(it => checks[g.id + '.' + it.id]).length;
+      total += items.length; done += gd;
+      return `
+        <details class="team-class ck-group" ${gd < items.length ? 'open' : ''}>
+          <summary><span>${g.icon} ${esc(g.title)}</span><span class="team-class-count">${gd}/${items.length}</span></summary>
+          <ul class="ck-list">
+            ${items.map(it => {
+              const key = g.id + '.' + it.id;
+              return `<li><label class="ck-item ${checks[key] ? 'done' : ''}"><input type="checkbox" data-key="${key}" ${checks[key] ? 'checked' : ''}><span>${esc(it.text)}${it.course ? ` <em class="course-tag ${B.courses[it.course].tag}">${esc(B.courses[it.course].name)}</em>` : ''}</span></label></li>`;
+            }).join('')}
+          </ul>
+        </details>`;
+    }).join('');
+    const pct = total ? Math.round(done / total * 100) : 0;
+    return `
+      <div class="team-lead ck-head" id="checklist">
+        <div class="team-lead-title">내 체크리스트 <span class="bk-me-sub">체크한 내용은 이 휴대폰에만 저장됩니다</span></div>
+        <div class="ck-course">
+          <span>내 코스</span>
+          ${['h', 's', 'a'].map(k => `<button type="button" class="bk-filter ck-course-btn ${course === k ? 'active' : ''}" data-course="${k}">${esc(B.courses[k].name)}</button>`).join('')}
+        </div>
+        <div class="ck-progress"><div class="ck-bar" style="width:${pct}%"></div></div>
+        <div class="ck-progress-label"><span>${done} / ${total} 완료</span><button type="button" class="ck-reset">모두 지우기</button></div>
+        ${course ? '' : '<div class="ck-hint">코스를 고르면 코스별 준비물이 함께 표시됩니다.</div>'}
+      </div>
+      ${groups}`;
+  }
+
+  function renderSafety(section) {
+    const root = $('#safety-root');
+    if (!root) return;
+    const docs = (B.safetyDocs || []).map(d => `<a class="sf-doc" href="${esc(d.file)}" target="_blank" rel="noopener">📄 ${esc(d.label)}</a>`).join('');
+    root.innerHTML = `
+      <div class="section-title">안전 · 체크리스트</div>
+      <div class="sf-nav">
+        <a class="bk-filter ${section === 'checklist' ? 'active' : ''}" href="#checklist">✅ 내 체크리스트</a>
+        <a class="bk-filter ${section !== 'checklist' ? 'active' : ''}" href="#safety">🛡️ 안전교육</a>
+      </div>
+      <div id="sf-checklist" ${section === 'checklist' ? '' : 'hidden'}>${checklistHtml()}</div>
+      <div id="sf-edu" ${section === 'checklist' ? 'hidden' : ''}>
+        <p class="bk-lead sf-lead">"교사와 학생 모두 즐겁고 안전한 현장체험학습 만들기"</p>
+        ${B.safety.map(sec => `
+          <details class="team-class bk-acc" id="sf-${sec.id}" ${section === sec.id ? 'open' : ''}>
+            <summary><span>${sec.icon} ${esc(sec.title)}</span></summary>
+            <div class="bk-acc-body">${sec.html}</div>
+          </details>`).join('')}
+        <div class="sf-docs">${docs}</div>
+        <div class="privacy-note">출처: 2026 용인삼계고 안전교육자료, 국토교통부·한국교통안전공단 수하물 안내. 정확한 항공 규정은 탑승 항공사 안내를 따릅니다.</div>
+      </div>`;
+
+    function bindChecklist() {
+      root.querySelectorAll('.ck-item input').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const checks = loadChecks();
+          if (cb.checked) checks[cb.dataset.key] = 1; else delete checks[cb.dataset.key];
+          saveChecks(checks);
+          const wrap = $('#sf-checklist');
+          const openIds = [...wrap.querySelectorAll('details[open]')].map(d => d.querySelector('summary span').textContent);
+          wrap.innerHTML = checklistHtml();
+          wrap.querySelectorAll('details').forEach(d => { d.open = openIds.includes(d.querySelector('summary span').textContent); });
+          bindChecklist();
+        });
+      });
+      root.querySelectorAll('.ck-course-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          saveCourse(btn.dataset.course === loadCourse() ? '' : btn.dataset.course);
+          $('#sf-checklist').innerHTML = checklistHtml();
+          bindChecklist();
+        });
+      });
+      const reset = root.querySelector('.ck-reset');
+      if (reset) reset.addEventListener('click', () => {
+        if (!confirm('체크한 내용을 모두 지울까요?')) return;
+        saveChecks({});
+        $('#sf-checklist').innerHTML = checklistHtml();
+        bindChecklist();
+      });
+    }
+    bindChecklist();
+
+    if (section && section !== 'checklist') {
+      const el = $('#sf-' + section);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    }
+  }
+  window.safetyShow = function (what) {
+    const h = what === 'checklist' ? '#checklist' : '#safety';
+    if (location.hash !== h) history.replaceState(null, '', h);
+    renderSafety(what === 'checklist' ? 'checklist' : '');
+  };
+
   /* ---------- 시작 ---------- */
   window.addEventListener('hashchange', route);
   document.addEventListener('DOMContentLoaded', () => {
     renderList();
+    renderSafety('');
     route();
   });
   /* 탭 버튼으로 들어왔을 때 목록이 비어 있지 않도록 */
