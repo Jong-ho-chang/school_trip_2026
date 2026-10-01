@@ -681,7 +681,7 @@ window.BOOKLET = {
       id: 'meet', title: '약속 시간과 장소', icon: '⏰',
       html: `
         <div class="sf-grid sf-grid-3">
-          <span>📅 2026년 10월 14일 (수)</span><span>⏰ 09시 학교 집결 (A팀 09:30 · B팀 11:30 버스 출발)</span><span>📍 학교에서 공항 가는 버스 탑승</span>
+          <span>📅 2026년 10월 14일 (수)</span><span>⏰ 08시 50분 학교 집결 (1진 3·4·6·9반 09:30 · 2진 1·2·5·7·8반 11:30 버스 출발)</span><span>📍 학교에서 공항 가는 버스 탑승</span>
         </div>
         <ul class="bk-list">
           <li>약속시간도 중요하지만 무엇보다 안전하게 도착하는 게 더 중요해요.</li>
@@ -743,7 +743,7 @@ window.BOOKLET = {
     {
       id: 'morning', title: '출발 아침 · 10월 14일', icon: '🌅',
       items: [
-        { id: 'time', text: '09시 학교 집결 — 늦으면 선생님께 먼저 연락' },
+        { id: 'time', text: '08시 50분 학교 집결 — 늦으면 선생님께 먼저 연락' },
         { id: 'bus', text: '내 버스 호차 확인 (버스·숙소 조회)' },
         { id: 'idcheck', text: '신분증 손에 들고 있기 (수속·보안검색 두 번 필요)' },
         { id: 'pass', text: '탑승권 화면 준비' },
