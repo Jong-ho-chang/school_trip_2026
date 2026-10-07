@@ -755,7 +755,9 @@ async function loadTeamStudents(){
   status.textContent='불러오는 중...';
   loadBus2Map(); // 2일차 호차 정보는 병렬로 (실패해도 명단 표시에는 지장 없음)
   try{
-    const payload=await loadTeamDataWithJsonp();
+    let payload;
+    try{ payload=await loadTeamDataWithJsonp(); }
+    catch(e){ status.textContent='다시 시도 중...'; payload=await loadTeamDataWithJsonp(); }
     if(!payload.ok||!Array.isArray(payload.students))throw new Error(payload.error||'잘못된 응답');
     teamStudents=payload.students.map(s=>({
       classNo:Number(s.classNo),number:Number(s.number),name:String(s.name||''),team:String(s.team||'')
@@ -777,7 +779,7 @@ function loadTeamDataWithJsonp(){
     const script=document.createElement('script');
     const timeout=setTimeout(()=>{
       cleanup();reject(new Error('응답 시간이 초과되었습니다. 웹 앱 공개 범위를 확인해 주세요.'));
-    },10000);
+    },30000);
     function cleanup(){
       clearTimeout(timeout);
       script.remove();
