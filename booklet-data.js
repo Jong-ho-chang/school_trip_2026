@@ -477,6 +477,33 @@ window.BOOKLET = {
         </ul>`
     },
     {
+      id: 'grill', title: '2일차 저녁 무송 · 고기 맛있게 굽기', icon: '🥓',
+      html: `
+        <p class="bk-lead">무송은 삼겹살·목살 무한리필 식당이고, 두꺼운 돌판에 직접 구워 먹습니다.</p>
+        <h4>굽는 순서</h4>
+        <ol class="bk-steps">
+          <li><strong>돌판이 충분히 달궈질 때까지 기다린다.</strong> 돌판은 늦게 달궈진다. 고기 한 점을 먼저 올려 "치익" 소리가 나면 그때 나머지를 올린다.</li>
+          <li><strong>한 번에 조금만 올린다.</strong> 돌판의 반 정도만 채우고, 고기끼리 겹치지 않게 한다. 많이 올리면 물이 생겨 고기가 삶아진다.</li>
+          <li><strong>처음 뒤집을 때까지는 건드리지 않는다.</strong> 아랫면이 노릇해지고 가장자리 색이 변하면 그때 처음 뒤집는다. 그전에 자꾸 들춰 보지 않는다.</li>
+          <li><strong>양면이 익으면 가위로 자른다.</strong> 한입 크기로 자른 뒤 자른 면도 한 번 더 굽는다.</li>
+          <li><strong>목살은 두꺼우니 더 오래 굽는다.</strong> 한 번 뒤집은 뒤에는 자주 뒤집어 가며 굽고, 잘라서 속에 분홍색이 남아 있으면 더 굽는다. <strong>돼지고기는 속까지 완전히 익혀 먹는다.</strong></li>
+        </ol>
+        <h4>테이블 약속</h4>
+        <ul class="bk-list">
+          <li>굽는 사람을 정하고 돌아가며 굽는다.</li>
+          <li>생고기를 집는 집게와 먹는 젓가락은 따로 쓴다.</li>
+          <li>돌판 위로 손을 뻗지 않는다. 소매와 긴 머리카락을 조심한다.</li>
+          <li><strong>돌판은 불을 꺼도 오래 뜨겁다.</strong> 식사가 끝난 뒤에도 손대지 않는다.</li>
+          <li>다 먹을 만큼만 추가 주문한다.</li>
+        </ul>
+        <h4>참고 영상 (필요한 구간만 재생)</h4>
+        <div class="yt-clips">
+          <button type="button" class="yt-clip" onclick="this.outerHTML='&lt;div class=&quot;yt-frame&quot;&gt;&lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/jfJkmNiYZP0?start=14&amp;end=60&amp;autoplay=1&amp;rel=0&amp;playsinline=1&quot; title=&quot;① 처음 뒤집는 때 — 46초&quot; allow=&quot;autoplay; encrypted-media; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;'"><img src="https://i.ytimg.com/vi/jfJkmNiYZP0/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-cap">① 처음 뒤집는 때 — 46초</span></button>
+          <button type="button" class="yt-clip" onclick="this.outerHTML='&lt;div class=&quot;yt-frame&quot;&gt;&lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/7Vw9C1Pj9ws?start=112&amp;end=246&amp;autoplay=1&amp;rel=0&amp;playsinline=1&quot; title=&quot;② 지방 녹이기 · 소리로 뒤집는 때 알기 — 2분 14초&quot; allow=&quot;autoplay; encrypted-media; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;'"><img src="https://i.ytimg.com/vi/7Vw9C1Pj9ws/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play">▶</span><span class="yt-cap">② 지방 녹이기 · 소리로 뒤집는 때 알기 — 2분 14초</span></button>
+        </div>
+        <p class="bk-note">영상 속 불판은 쇠 불판이라 무송의 돌판과 다릅니다. 굽는 요령만 참고하세요. 출처: SBS STORY 〈고기 굽기 달인, 최적의 온도에서 가장 맛있게 삼겹살 굽는 비법!〉, 선진 〈고기 굽기 마스터와 함께하는 삼겹살 맛있게 굽는 방법!〉 (YouTube)</p>`
+    },
+    {
       id: 'sites', title: '관광지 안전수칙', icon: '🗺️',
       html: `
         <h4>실내 박물관 · 전시관 · 공연장</h4>

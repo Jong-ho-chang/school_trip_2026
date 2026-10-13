@@ -241,6 +241,14 @@
   .bk-check li{padding-left:24px;position:relative;margin-bottom:4px;}
   .bk-check li::before{content:'';position:absolute;left:2px;top:5px;width:12px;height:12px;border:1.5px solid var(--gray-3);border-radius:3px;}
   .bk-steps{padding-left:22px;margin:4px 0;} .bk-steps li{margin-bottom:3px;}
+  .grill-link{color:var(--blue);font-weight:500;text-decoration:none;white-space:nowrap;}
+  .yt-clips{display:flex;flex-direction:column;gap:10px;margin:6px 0 8px;}
+  .yt-clip{position:relative;display:block;width:100%;padding:0;border:0;border-radius:var(--radius);overflow:hidden;background:#000;cursor:pointer;aspect-ratio:16/9;}
+  .yt-clip img{width:100%;height:100%;object-fit:cover;opacity:.8;display:block;}
+  .yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(220,0,0,.9);color:#fff;font-size:22px;line-height:54px;text-align:center;}
+  .yt-cap{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-size:12.5px;font-weight:500;text-align:left;}
+  .yt-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:#000;}
+  .yt-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
   .bk-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0;}
   .bk-table th,.bk-table td{padding:6px 8px;border-bottom:1px solid var(--gray-2);text-align:center;}
   .bk-table th{font-weight:500;color:var(--gray-4);font-size:11px;}
@@ -417,7 +425,7 @@
           <tr><td class="time">12:00–13:00</td><td><div class="act">중식<span class="meal-tag">제주오름밥상</span></div><div class="tl-d">오름정찬 · 12시 예약 완료</div></td></tr>
           <tr><td class="time">14:00–15:00</td><td><div class="act">퍼시픽 요트투어</div><div class="tl-d">14시 예약 완료</div></td></tr>
           <tr><td class="time">15:30–16:30</td><td><div class="act">서귀포 올레시장</div></td></tr>
-          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div><div class="tl-d">17시 예약 완료</div></td></tr>
+          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div><div class="tl-d">17시 예약 완료 · <a class="grill-link" href="#safety/grill">🥓 고기 굽는 법</a></div></td></tr>
           <tr><td class="time">19:00~</td><td><div class="act">숙소 도착 및 자유시간</div></td></tr>
         </table>
       </div>
@@ -429,7 +437,7 @@
           <tr><td class="time">11:00–12:30</td><td><div class="act">성산일출봉</div></td></tr>
           <tr><td class="time">13:00–14:00</td><td><div class="act">중식<span class="meal-tag">국수인가갈치인가</span></div><div class="tl-d">고기국수 + 돔베고기 · 13시 예약 완료</div></td></tr>
           <tr><td class="time">14:20–16:00</td><td><div class="act">아쿠아플라넷</div><div class="tl-d">예약 완료</div></td></tr>
-          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div><div class="tl-d">17시 예약 완료</div></td></tr>
+          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div><div class="tl-d">17시 예약 완료 · <a class="grill-link" href="#safety/grill">🥓 고기 굽는 법</a></div></td></tr>
           <tr><td class="time">19:00~</td><td><div class="act">숙소 도착 및 자유시간</div></td></tr>
         </table>
       </div>
@@ -442,7 +450,7 @@
           <tr><td class="time">12:30–13:30</td><td><div class="act">중식<span class="meal-tag">샤브마니아</span></div><div class="tl-d">소고기샤브 + 월남쌈 · 12시 30분 예약 완료</div></td></tr>
           <tr><td class="time">13:40–15:00</td><td><div class="act">제주동화마을</div></td></tr>
           <tr><td class="time">15:10–16:10</td><td><div class="act">다이나믹메이즈 - PKG<span class="active-tag">액티비티</span></div><div class="tl-d">15시 예약 완료 · 양말 & 바지 필수</div></td></tr>
-          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div><div class="tl-d">17시 예약 완료</div></td></tr>
+          <tr><td class="time">17:00–18:00</td><td><div class="act">석식<span class="meal-tag">무송</span></div><div class="tl-d">17시 예약 완료 · <a class="grill-link" href="#safety/grill">🥓 고기 굽는 법</a></div></td></tr>
           <tr><td class="time">19:00~</td><td><div class="act">숙소 도착 및 자유시간</div></td></tr>
         </table>
       </div>
@@ -508,7 +516,7 @@
         <div class="tl"><span class="tl-t">12:00</span><div><div class="tl-n">중식<span class="meal-tag">오름정찬</span></div><div class="tl-d">제주오름밥상</div></div></div>
         <div class="tl"><span class="tl-t">14:00</span><div><div class="tl-n">퍼시픽 요트 체험</div><div class="tl-d">요트 탑승, 주상절리 해상 관람</div></div></div>
         <div class="tl"><span class="tl-t">15:30</span><div><div class="tl-n">서귀포 올레시장</div><div class="tl-d">먹거리·기념품 자유 탐방</div></div></div>
-        <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div></div></div>
+        <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div><div class="tl-d"><a class="grill-link" href="#safety/grill">🥓 고기 맛있게 굽는 법</a></div></div></div>
       </div>
     </div>
     <div class="course-card">
@@ -521,7 +529,7 @@
         <div class="tl"><span class="tl-t">11:00</span><div><div class="tl-n">성산일출봉</div><div class="tl-d">유네스코 세계유산 등반·지질 트레일</div></div></div>
         <div class="tl"><span class="tl-t">13:00</span><div><div class="tl-n">중식<span class="meal-tag">고기국수·돔베고기</span></div><div class="tl-d">국수인가갈치인가</div></div></div>
         <div class="tl"><span class="tl-t">14:20</span><div><div class="tl-n">아쿠아플라넷 제주</div><div class="tl-d">국내 최대 수족관 관람 (실내)</div></div></div>
-        <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div></div></div>
+        <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div><div class="tl-d"><a class="grill-link" href="#safety/grill">🥓 고기 맛있게 굽는 법</a></div></div></div>
         <div class="video-label">🎬 E-Team 코스 소개 영상</div>
         <div class="course-video">
           <iframe src="https://drive.google.com/file/d/1HVRC935qGLVnarOnD-EtCp6kTsJBdqKx/preview" allow="autoplay" allowfullscreen></iframe>
@@ -539,7 +547,7 @@
         <div class="tl"><span class="tl-t">12:30</span><div><div class="tl-n">중식<span class="meal-tag">소고기샤브·월남쌈</span></div><div class="tl-d">샤브마니아</div></div></div>
         <div class="tl"><span class="tl-t">13:40</span><div><div class="tl-n">제주동화마을</div><div class="tl-d">포토존·벽화마을 (야외)</div></div></div>
         <div class="tl"><span class="tl-t">15:10</span><div><div class="tl-n">다이나믹메이즈<span class="active-tag">액티비티</span></div><div class="tl-d">체험형 미로 탈출. 바지·양말 필수</div></div></div>
-        <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div></div></div>
+        <div class="tl"><span class="tl-t">17:00</span><div><div class="tl-n">석식 (무송)</div><div class="tl-d"><a class="grill-link" href="#safety/grill">🥓 고기 맛있게 굽는 법</a></div></div></div>
       </div>
     </div>
   </div>
