@@ -321,6 +321,14 @@
   .ck-item em{font-style:normal;font-size:10px;vertical-align:middle;padding:0 5px;margin-left:4px;}
   footer{text-align:center;padding:20px 0 40px;font-size:11px;color:var(--gray-3);}
   .mt12{margin-top:12px;}
+  /* 만족도·소감문 탭 */
+  .sv-switch{display:flex;gap:8px;margin-bottom:12px;}
+  .sv-btn{flex:1;padding:10px 6px;border-radius:var(--radius);border:1.5px solid var(--gray-2);background:#fff;font-family:'Noto Sans KR',sans-serif;font-size:13.5px;font-weight:500;color:var(--gray-4);cursor:pointer;line-height:1.4;}
+  .sv-btn small{display:block;font-size:11px;font-weight:400;}
+  .sv-btn.active{border-color:var(--red);color:var(--red);background:var(--red-lt);}
+  .sv-frame-wrap{background:#fff;border:1px solid var(--gray-2);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .sv-frame-wrap iframe{display:block;width:100%;height:1400px;border:0;}
+  .sv-open{display:block;text-align:right;font-size:12px;color:var(--gray-4);margin:8px 2px 0;}
 </style>
 </head>
 <body>
@@ -346,6 +354,7 @@
   <button onclick="switchTab('course',this)">🗺️ 2일차 코스 안내</button>
   <button onclick="switchTab('teams',this)">👥 2일차 팀 배정 조회</button>
   <button onclick="switchTab('lookup',this)">🚌 버스·숙소·항공 조회</button>
+  <button id="nav-survey" onclick="switchTab('survey',this)">📝 만족도·소감문</button>
 </nav>
 
 <main>
@@ -671,6 +680,23 @@
   <div class="privacy-note">본인 확인(학번+이름 일치) 후 본인 정보만 표시됩니다. 조회 결과를 캡처해 외부에 공유하지 마세요. 예약번호와 이름만 있으면 다른 사람이 체크인할 수 있으니 예약번호를 친구에게 대신 알려 주지 마세요. 숙소 호실은 담임 선생님 입력이 완료된 뒤부터 표시됩니다.</div>
 </section>
 
+<!-- 만족도 조사 · 소감문 (Google Forms 임베드) -->
+<section id="tab-survey" class="tab-section">
+  <div class="section-title">만족도 조사 · 소감문</div>
+  <div class="team-lead">
+    <div class="team-lead-title">두 가지를 모두 제출해 주세요</div>
+    <div class="team-lead-body">① 만족도 조사는 이름을 쓰지 않는 익명 설문입니다(약 5분). ② 소감문은 반·번호·이름을 쓰고 제출합니다(약 10~15분).</div>
+  </div>
+  <div class="sv-switch" role="tablist" aria-label="설문 선택">
+    <button class="sv-btn active" type="button" onclick="showSurvey('satisfaction',this)">① 만족도 조사<small>익명 · 약 5분</small></button>
+    <button class="sv-btn" type="button" onclick="showSurvey('essay',this)">② 소감문<small>실명 · 약 10~15분</small></button>
+  </div>
+  <div class="sv-frame-wrap">
+    <iframe id="survey-frame" title="설문지" loading="lazy">불러오는 중...</iframe>
+  </div>
+  <a id="survey-open" class="sv-open" href="#" target="_blank" rel="noopener">화면이 불편하면 새 창으로 열기 ↗</a>
+</section>
+
 </main>
 
 <footer>용인삼계고등학교 2학년 · J.E.J.U. LENS 프로젝트 2026</footer>
@@ -682,6 +708,7 @@ function switchTab(id,btn){
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
   if(id==='teams')loadTeamStudents();
+  if(id==='survey'&&!document.getElementById('survey-frame').dataset.key)showSurvey('satisfaction');
   if(id==='booklet'){
     if(!/^#place\//.test(location.hash)&&typeof window.bookletShowList==='function')window.bookletShowList();
   }else if(id==='safety'){
@@ -690,6 +717,21 @@ function switchTab(id,btn){
     history.replaceState(null,'',location.pathname+location.search);
   }
 }
+const SURVEY_URLS={
+  satisfaction:'https://docs.google.com/forms/d/e/1FAIpQLSegP59Ji8t63KcIQgm2helo8makMj_7iaYEgE-DMlXAf_vEUg/viewform',
+  essay:'https://docs.google.com/forms/d/e/1FAIpQLSeDznNEjq6anPx_gNZH80bCjSxTXJyB2D7aXH-xqo7opp_72w/viewform'
+};
+function showSurvey(key,btn){
+  const url=SURVEY_URLS[key];
+  const frame=document.getElementById('survey-frame');
+  if(frame.dataset.key!==key){frame.src=url+'?embedded=true';frame.dataset.key=key;}
+  document.getElementById('survey-open').href=url;
+  if(btn){document.querySelectorAll('.sv-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+}
+/* 반톡 공유용: .../school_trip_2026/#survey 로 들어오면 이 탭을 바로 연다 */
+function openSurveyFromHash(){if(location.hash==='#survey')switchTab('survey',document.getElementById('nav-survey'));}
+document.addEventListener('DOMContentLoaded',openSurveyFromHash);
+window.addEventListener('hashchange',openSurveyFromHash);
 function switchDay(id,btn){
   document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
